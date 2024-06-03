@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hopital.Model
 {
-    public interface Dao<T, PK>
+    interface Dao<T, PK>
     {
         List<T> FindAll(); //aussi appelée SelectAll
         T FindById(PK id);
