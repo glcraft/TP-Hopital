@@ -31,16 +31,17 @@ namespace Hopital
 
         static void NewLogin()
         {
-            Console.WriteLine("Welcome to the Console Login App");
-            Console.WriteLine(" ___  ___ _  _    __    __ ______ ______ __     ____    __  __   ___    __  ____  __ ______  ___  __   ");
-            Console.WriteLine(@" ||\\//|| \\//    ||    || | || | | || | ||    ||       ||  ||  // \\  (( \ || \\ || | || | // \\ ||   ");
-            Console.WriteLine(@" || \/ ||  )/     ||    ||   ||     ||   ||    ||==     ||==|| ((   ))  \\  ||_// ||   ||   ||=|| ||   ");
-            Console.WriteLine(@" ||    || //      ||__| ||   ||     ||   ||__| ||___    ||  ||  \\_//  \_)) ||    ||   ||   || || ||__|");
-            Console.WriteLine();
+          
             bool goOn = true;
 
             do
             {
+                Console.WriteLine("Welcome to the Console App");
+                Console.WriteLine(" ___  ___ _  _    __    __ ______ ______ __     ____    __  __   ___    __  ____  __ ______  ___  __   ");
+                Console.WriteLine(@" ||\\//|| \\//    ||    || | || | | || | ||    ||       ||  ||  // \\  (( \ || \\ || | || | // \\ ||   ");
+                Console.WriteLine(@" || \/ ||  )/     ||    ||   ||     ||   ||    ||==     ||==|| ((   ))  \\  ||_// ||   ||   ||=|| ||   ");
+                Console.WriteLine(@" ||    || //      ||__| ||   ||     ||   ||__| ||___    ||  ||  \\_//  \_)) ||    ||   ||   || || ||__|");
+                Console.WriteLine();
                 Console.Write("Enter username: ");
                 string username = Console.ReadLine();
                 Console.Write("Enter password: ");
@@ -51,8 +52,6 @@ namespace Hopital
 
                 if (user != null)
                 {
-                    Console.WriteLine("Login successful!" + user.ToString());
-                    // TODO: Add logic to navigate to the main application functionality.
                     switch (user)
                     {
                         case Doctor doctor:
@@ -68,18 +67,15 @@ namespace Hopital
                 }
                 else
                 {
-                    Console.WriteLine("Invalid username or password.");
-                    Console.WriteLine("Access denied.");
+                    Console.WriteLine("\nInvalid username or password.");
+                    Console.WriteLine("------- Access denied ------\n");
                 }
 
-                Console.WriteLine("Do you want to quit the application  y/n ?");
+                Console.WriteLine("Do you want shut down the application  y/n ?");
                 char resp = Convert.ToChar(Console.ReadLine());
                 if (resp == 'y') goOn = false;
+                Console.Clear();
             } while (goOn);
-
-
-
-
         }
 
         static void DoctorInterface(Doctor doctor)
@@ -87,12 +83,19 @@ namespace Hopital
             bool logout = false;
             while (!logout)
             {
-                Console.WriteLine($"Hello Doctor {doctor.Name}");
+
+                Console.WriteLine("\n"+$"Hello Doctor {doctor.Name} you are logged as a doctor.");
+                
                 Console.WriteLine($"-----------------------------------");
+                Console.WriteLine($"Your current patient is ..... : ");
+                Console.WriteLine();
                 Console.WriteLine($" 1 - Display the queue");
-                Console.WriteLine($" 2 - Following Patient");
-                Console.WriteLine($" 3 - See all recorded visits");
+                Console.WriteLine($" 2 - Next Patient");
+                Console.WriteLine($" 3 - Display lasts visits (not saved)");
+                Console.WriteLine($" 4 - Save lasts visits in DB");
+                Console.WriteLine($" 5 - See all recorded visits (from db)");
                 Console.WriteLine($" 10 - Logout");
+                Console.Write($"\n--> Your choise : ");
 
                 int resp = Convert.ToInt16(Console.ReadLine());
                 switch (resp)
@@ -112,12 +115,15 @@ namespace Hopital
             bool logout = false;
             while (!logout)
             {
-                Console.WriteLine($"Hello Miss {secretary.Name}");
+                Console.WriteLine($"Hello Miss {secretary.Name} you are logged as a secretary.");
                 Console.WriteLine($"-----------------------------------");
                 Console.WriteLine($" 1 - Inqueue a new patient");
-                Console.WriteLine($" 2 - Following Patient");
-                Console.WriteLine($" 3 - See all recorded visits");
+                Console.WriteLine($" 2 - Display the queue");
+                Console.WriteLine($" 3 - Display the next Patient");
+                Console.WriteLine($" 4 - Display all visits of a patient");
+                Console.WriteLine($" 5 - Update patient information");
                 Console.WriteLine($" 10 - Logout");
+                Console.Write($"\n--> Your choise : ");
 
                 int resp = Convert.ToInt16(Console.ReadLine());
                 switch (resp)
