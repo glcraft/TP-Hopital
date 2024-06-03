@@ -9,7 +9,9 @@ namespace Hopital.Model
 {
     class DaoStaffSqlServer : IDaoStaff
     {
-        private string connectionString = @"Data Source=ENVY\SQLEXPRESS;Initial Catalog=Hopital-tp1;Integrated Security=True";
+        //private string connectionString = @"Data Source=ENVY\SQLEXPRESS;Initial Catalog=Hopital-tp1;Integrated Security=True";
+        SqlConnection connection = new SqlConnection(connectionString);
+
         public void Create(Staff obj)
         {
             throw new NotImplementedException();
@@ -80,7 +82,7 @@ namespace Hopital.Model
             string sql = "select * from Staffs where login ="+loginToFind ;
            
 
-            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(sql, connection);
             connection.Open();
 
