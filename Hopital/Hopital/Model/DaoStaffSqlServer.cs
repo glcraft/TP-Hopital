@@ -78,7 +78,7 @@ namespace Hopital.Model
         public Staff Login(string loginToFind, string passwordToFind)
         {
            
-            Staff user = new Staff();
+            Staff user = null;
 
             string sql = "SELECT * FROM Staffs WHERE login = @login AND password = @password";
 
