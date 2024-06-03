@@ -27,12 +27,38 @@ namespace Hopital.Model
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = SqlServer.Get().Connection;
+            SqlCommand command = new SqlCommand("DELETE FROM Patients WHERE id=@id", connection);
+            command.Parameters.AddWithValue("id", id);
+            connection.Open();
+            // execution de la requete
+            command.ExecuteNonQuery();
+
+            connection.Close();
         }
 
         public List<Patient> FindAll()
         {
-            throw new NotImplementedException();
+            List<Patient> resp = new List<Patient>();
+            SqlConnection connection = SqlServer.Get().Connection;
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Patients";
+
+            connection.Open();
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+                resp.Add(new Patient(
+                    (int)reader["id"],
+                    (string)reader["firstname"],
+                    (string)reader["lastname"],
+                    (string)reader["address"],
+                    (int)reader["age"],
+                    (string)reader["phoneNumber"]
+                ));
+
+            connection.Close();
+            return resp;
         }
 
         public Patient FindById(int id)
@@ -57,9 +83,22 @@ namespace Hopital.Model
             return p;
         }
 
-        public void Update(Patient obj)
+        public void Update(Patient patient)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = SqlServer.Get().Connection;
+            SqlCommand command = new SqlCommand("UPDATE Patients SET firstname=@firstname, lastname=@lastname, address=@address, age=@age, phoneNumber=@phoneNumber WHERE id=@id", connection);
+            command.Parameters.AddWithValue("id", patient.Id);
+            command.Parameters.AddWithValue("firstname", patient.Firstname);
+            command.Parameters.AddWithValue("lastname", patient.Lastname);
+            command.Parameters.AddWithValue("address", patient.Address);
+            command.Parameters.AddWithValue("age", patient.Age);
+            command.Parameters.AddWithValue("phoneNumber", patient.PhoneNumber);
+            connection.Open();
+            // execution de la requete
+            command.ExecuteNonQuery();
+            // Console.WriteLine(sql);
+
+            connection.Close();
         }
     }
 }
