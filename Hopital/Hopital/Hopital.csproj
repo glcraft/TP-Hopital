@@ -48,6 +48,7 @@
     <Compile Include="Model\IDaoStaff.cs" />
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\Secretary.cs" />
+    <Compile Include="Model\SqlServer.cs" />
     <Compile Include="Model\Staff.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

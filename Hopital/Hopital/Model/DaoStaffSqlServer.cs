@@ -9,8 +9,9 @@ namespace Hopital.Model
 {
     class DaoStaffSqlServer : IDaoStaff
     {
-        private string connectionString = @"Data Source=ENVY\SQLEXPRESS;Initial Catalog=Hopital-tp1;Integrated Security=True";
-       // SqlConnection connection = new SqlConnection(connectionString);
+       // private string connectionString = @"Data Source=ENVY\SQLEXPRESS;Initial Catalog=Hopital-tp1;Integrated Security=True";
+       //SqlConnection connection = new SqlConnection(connectionString);
+        SqlConnection connection = SqlServer.Get().Connection;
 
         public void Create(Staff obj)
         {
@@ -28,7 +29,7 @@ namespace Hopital.Model
 
             string sql = "select * from Staffs";
 
-            SqlConnection connection = new SqlConnection(connectionString);
+          //  SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(sql, connection);
             connection.Open();
 
@@ -81,7 +82,7 @@ namespace Hopital.Model
 
             string sql = "SELECT * FROM Staffs WHERE login = @login AND password = @password";
 
-            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(sql, connection);
             connection.Open();
             command.Parameters.AddWithValue("@login", loginToFind);
