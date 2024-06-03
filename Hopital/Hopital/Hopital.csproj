@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hospital.cs" />
     <Compile Include="Model\DaoStaffSqlServer.cs" />
     <Compile Include="Model\DAO.cs" />
     <Compile Include="Model\IDaoStaff.cs" />

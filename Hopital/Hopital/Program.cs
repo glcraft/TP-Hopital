@@ -113,6 +113,11 @@ namespace Hopital
         static void SecretaryInterface(Secretary secretary)
         {
             bool logout = false;
+
+            Hospital.MyHospital.WaitingQueue.Enqueue(1);
+
+
+
             while (!logout)
             {
                 Console.WriteLine($"Hello Miss {secretary.Name} you are logged as a secretary.");
