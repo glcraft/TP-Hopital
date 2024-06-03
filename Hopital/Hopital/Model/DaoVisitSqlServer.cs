@@ -16,7 +16,9 @@ namespace Hopital.Model
         {
             string sql = "INSERT INTO Visits values (@patient_id, @doctor_id, @date, @room_id, @fee)";
 
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = SqlServer.Get().Connection;
+
+            //SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = connection.CreateCommand();
 
             command.CommandText = sql;
@@ -36,7 +38,8 @@ namespace Hopital.Model
         {
             string sql = "DELETE FROM Visits WHERE id = " + id;
 
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = SqlServer.Get().Connection;
+            //SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = connection.CreateCommand();
             command.CommandText = sql;
 
@@ -60,7 +63,8 @@ namespace Hopital.Model
         {
             List<Visit> listeV = new List<Visit>();
 
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = SqlServer.Get().Connection;
+            //SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = connection.CreateCommand();
 
             //command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE doctor_id LIKE '@id_doct'";
@@ -90,7 +94,8 @@ namespace Hopital.Model
         {
             List<Visit> listeV = new List<Visit>();
 
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = SqlServer.Get().Connection;
+            //SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = connection.CreateCommand();
 
             command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE patient_id = @id_pat";

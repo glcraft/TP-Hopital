@@ -8,7 +8,6 @@ namespace Hopital.Model
 {
     class Visit
     {
-        //string sql = "INSERT INTO Visits values (@id, @patient_id, @doctor_id, @date, @room_id, @fee)";
         private int id;
         private int patient_id;
         private string doctor_id;
