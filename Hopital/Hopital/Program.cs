@@ -12,7 +12,7 @@ namespace Hopital
         static void Main(string[] args)
         {
 
-            //TestSelectAll();
+            TestSelectAll();
             //TestLog
         }
 
