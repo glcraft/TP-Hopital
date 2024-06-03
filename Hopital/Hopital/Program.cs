@@ -10,6 +10,12 @@ namespace Hopital
     {
         static void Main(string[] args)
         {
+            Test1();
+        }
+
+        static void Test1()
+        {
+            Console.WriteLine("Ceci est le test1");
         }
     }
 }
