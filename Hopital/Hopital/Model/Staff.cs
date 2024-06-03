@@ -31,7 +31,10 @@ namespace Hopital.Model
         public string Name { get => name; set => name = value; }
         public int Jod { get => job; set => job = value; }
 
-        
+        public override string ToString()
+        {
+            return $"Log : {login}, Pwd : {password}, name : {name}";
+        }
 
     }
 }

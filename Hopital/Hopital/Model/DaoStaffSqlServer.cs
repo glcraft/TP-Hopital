@@ -35,10 +35,10 @@ namespace Hopital.Model
 
             while (reader.Read())
             {
-                string login = reader.GetString(0); // Supposons que le login est à l'index 1
-                string password = reader.GetString(1); // Supposons que le mot de passe est à l'index 2
-                string name = reader.GetString(2); // Supposons que le Nom est à l'index 3
-                int job = reader.GetInt32(3); // Supposons que le job est à l'index 4
+                string login = reader.GetString(0);  
+                string password = reader.GetString(1);  
+                string name = reader.GetString(2);  
+                int job = reader.GetInt32(3);  
 
                 Staff staffMember = null;
 
@@ -52,25 +52,17 @@ namespace Hopital.Model
                 }
                 else if (job == -1)
                 {
-                    staffMember = new Doctor(login, password, name, job);
+                    continue;
+                   // staffMember = new Doctor(login, password, name, job);
                 }
 
                 staffList.Add(staffMember);
-
             }
             connection.Close();
-
             return staffList;
-
-
         }
  
         public Staff FindById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Staff> FindByNom(string nom)
         {
             throw new NotImplementedException();
         }
@@ -79,5 +71,51 @@ namespace Hopital.Model
         {
             throw new NotImplementedException();
         }
+
+        public Staff Login(string loginToFind, string passwordTofind)
+        {
+           
+            Staff user = new Staff();
+
+            string sql = "select * from Staffs where login ="+loginToFind ;
+           
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(sql, connection);
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                string login = reader.GetString(0);
+                string password = reader.GetString(1);
+                string name = reader.GetString(2);
+                int job = reader.GetInt32(3);
+
+                 
+
+                if (job >= 1)
+                {
+                   user = new Doctor(login, password, name, job);
+                }
+                else if (job == 0)
+                {
+                    user = new Secretary(login, password, name, job);
+                }
+                else if (job == -1)
+                {
+                    continue;
+                    // staffMember = new Doctor(login, password, name, job);
+                }
+
+                
+            }
+            connection.Close();
+            return user;
+        }
+
+
     }
 }

@@ -9,6 +9,6 @@ namespace Hopital.Model
  
     interface IDaoStaff : IDao<Staff, int>
     {
-        List<Staff> FindByNom(string nom);
+        Staff Login(string login, string password);
     }
 }
