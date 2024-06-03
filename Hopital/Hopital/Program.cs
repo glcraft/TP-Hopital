@@ -12,21 +12,21 @@ namespace Hopital
         static void Main(string[] args)
         {
 
-            TestSelectAll();
-            //TestLog
+            //TestSelectAll();
+            TestLog();
         }
 
         static void TestSelectAll()
         {
             List<Staff> x = new DaoStaffSqlServer().FindAll();
             foreach (Staff p in x)
-                Console.WriteLine(p.Name + "login " + p.Login + "passwd " +  p.Password );
+                Console.WriteLine(p.Name + "login =" + p.Login + "password =" +  p.Password );
         }
 
         static void TestLog()
         {
 
-            Console.WriteLine(new DaoStaffSqlServer().Login("a", ""));
+            Console.WriteLine(new DaoStaffSqlServer().Login("a", "a"));
 
         }
 

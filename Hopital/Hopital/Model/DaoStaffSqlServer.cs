@@ -9,8 +9,8 @@ namespace Hopital.Model
 {
     class DaoStaffSqlServer : IDaoStaff
     {
-        //private string connectionString = @"Data Source=ENVY\SQLEXPRESS;Initial Catalog=Hopital-tp1;Integrated Security=True";
-        SqlConnection connection = new SqlConnection(connectionString);
+        private string connectionString = @"Data Source=ENVY\SQLEXPRESS;Initial Catalog=Hopital-tp1;Integrated Security=True";
+       // SqlConnection connection = new SqlConnection(connectionString);
 
         public void Create(Staff obj)
         {
@@ -74,20 +74,19 @@ namespace Hopital.Model
             throw new NotImplementedException();
         }
 
-        public Staff Login(string loginToFind, string passwordTofind)
+        public Staff Login(string loginToFind, string passwordToFind)
         {
            
             Staff user = new Staff();
 
-            string sql = "select * from Staffs where login ="+loginToFind ;
-           
+            string sql = "SELECT * FROM Staffs WHERE login = @login AND password = @password";
 
-            //SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(sql, connection);
             connection.Open();
-
+            command.Parameters.AddWithValue("@login", loginToFind);
+            command.Parameters.AddWithValue("@password", passwordToFind);
             SqlDataReader reader = command.ExecuteReader();
-
 
             while (reader.Read())
             {
@@ -95,9 +94,6 @@ namespace Hopital.Model
                 string password = reader.GetString(1);
                 string name = reader.GetString(2);
                 int job = reader.GetInt32(3);
-
-                 
-
                 if (job >= 1)
                 {
                    user = new Doctor(login, password, name, job);
@@ -112,7 +108,6 @@ namespace Hopital.Model
                     // staffMember = new Doctor(login, password, name, job);
                 }
 
-                
             }
             connection.Close();
             return user;
