@@ -14,7 +14,7 @@ namespace Hopital.Model
         private SqlServer()
         {
             string connectionString = FakeEnvironment.GetEnvVar("SQL_PROPERTIES");
-            Console.WriteLine("connectionString: {0}", connectionString);
+            //Console.WriteLine("connectionString: {0}", connectionString);
             if (connectionString == null)
                 throw new EnvVarNotDefinedException("SQL_PROPERTIES");
             Connection = new SqlConnection(connectionString);
