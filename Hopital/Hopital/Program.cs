@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,28 +7,60 @@ using Hopital.Model;
 
 namespace Hopital
 {
-    class Program
+    class TestVisits 
     {
-        static void Main(string[] args)
+        public static void TestCreateVisit()
         {
-
-            //TestSelectAll();
-            //TestLog();
-            NewLogin();
+            DaoVisite x = new DaoVisitSqlServer();
+            x.Create(new Visit(1, "a", DateTime.Now, 1));
         }
 
-        static void TestSelectAll()
+        public static void TestDeleteVisit()
+        {
+            DaoVisite x = new DaoVisitSqlServer();
+            x.Delete(2);
+        }
+
+        public static void TestFindByDoctorID()
+        {
+            DaoVisite x = new DaoVisitSqlServer();
+            List<Visit> listV = x.FindByDoctorID("a");
+            Console.WriteLine("Visit found: {0}", listV.Count);
+            foreach (Visit v in listV)
+            {
+                Console.WriteLine(v);
+            }
+        }
+        public static void TestFindByPatientID()
+        {
+            DaoVisite x = new DaoVisitSqlServer();
+            List<Visit> listV = x.FindByPatientID(1);
+            foreach (Visit v in listV)
+            {
+                Console.WriteLine(v);
+            }
+        }
+    }
+    class TestStaff 
+    {
+        public static void TestSelectAll()
         {
             List<Staff> x = new DaoStaffSqlServer().FindAll();
             foreach (Staff p in x)
                 Console.WriteLine(p.Name + "login =" + p.Login + "password =" + p.Password);
         }
 
-        static void TestLog()
+        public static void TestLog()
         {
             Console.WriteLine(new DaoStaffSqlServer().Login("a", "a"));
         }
-
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            NewLogin();
+        }
         static void NewLogin()
         {
           
@@ -157,18 +189,5 @@ namespace Hopital
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
