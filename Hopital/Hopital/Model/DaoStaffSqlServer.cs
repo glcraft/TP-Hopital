@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
@@ -9,8 +9,6 @@ namespace Hopital.Model
 {
     class DaoStaffSqlServer : IDaoStaff
     {
-       // private string connectionString = @"Data Source=ENVY\SQLEXPRESS;Initial Catalog=Hopital-tp1;Integrated Security=True";
-       //SqlConnection connection = new SqlConnection(connectionString);
         SqlConnection connection = SqlServer.Get().Connection;
 
         public void Create(Staff obj)
@@ -18,7 +16,7 @@ namespace Hopital.Model
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             throw new NotImplementedException();
         }
@@ -65,7 +63,7 @@ namespace Hopital.Model
             return staffList;
         }
  
-        public Staff FindById(int id)
+        public Staff FindById(string id)
         {
             throw new NotImplementedException();
         }
