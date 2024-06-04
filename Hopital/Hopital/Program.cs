@@ -9,28 +9,29 @@ namespace Hopital
 {
     class TestVisits 
     {
-        static void TestCreateVisit()
+        public static void TestCreateVisit()
         {
             DaoVisite x = new DaoVisitSqlServer();
-            x.Create(new Visit(1, "123456", DateTime.Now, 1));
+            x.Create(new Visit(1, "a", DateTime.Now, 1));
         }
 
-        static void TestDeleteVisit()
+        public static void TestDeleteVisit()
         {
             DaoVisite x = new DaoVisitSqlServer();
             x.Delete(2);
         }
 
-        static void TestFindByDoctorID()
+        public static void TestFindByDoctorID()
         {
             DaoVisite x = new DaoVisitSqlServer();
-            List<Visit> listV = x.FindByDoctorID("123456");
+            List<Visit> listV = x.FindByDoctorID("a");
+            Console.WriteLine("Visit found: {0}", listV.Count);
             foreach (Visit v in listV)
             {
                 Console.WriteLine(v);
             }
         }
-        static void TestFindByPatientID()
+        public static void TestFindByPatientID()
         {
             DaoVisite x = new DaoVisitSqlServer();
             List<Visit> listV = x.FindByPatientID(1);
@@ -42,14 +43,14 @@ namespace Hopital
     }
     class TestStaff 
     {
-        static void TestSelectAll()
+        public static void TestSelectAll()
         {
             List<Staff> x = new DaoStaffSqlServer().FindAll();
             foreach (Staff p in x)
                 Console.WriteLine(p.Name + "login =" + p.Login + "password =" + p.Password);
         }
 
-        static void TestLog()
+        public static void TestLog()
         {
             Console.WriteLine(new DaoStaffSqlServer().Login("a", "a"));
         }
