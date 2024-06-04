@@ -11,16 +11,16 @@ namespace Hopital.Views
     {
         Secretary secretary;
 
-        public SecretaryDisplay (Secretary sec)
+        public SecretaryDisplay(Secretary sec)
         {
             this.secretary = sec;
         }
 
         public void Display()
         {
-             bool logout = false;
+            bool logout = false;
 
-        
+
 
             while (!logout)
             {
@@ -41,11 +41,18 @@ namespace Hopital.Views
                     case 1:
                         new PatientCheckInDisplay().Display();
                         break;
-
                     case 2:
                         new QueueDisplay().Display();
                         break;
-
+                    case 3:
+                        new PatientNextDisplay().Display();
+                        break;
+                    case 4:
+                        new PatientAllVisitsDisplay().Display();
+                        break;
+                    case 5:
+                        new PatientUpdateDisplay().Display();
+                        break;
                     case 10:
                         logout = true;
                         break;
@@ -53,7 +60,7 @@ namespace Hopital.Views
                         Console.WriteLine("Invalid option. Please try again.");
                         break;
                 }
-}
+            }
         }
 
     }
