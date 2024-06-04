@@ -35,10 +35,9 @@ namespace Hopital.Model
             get { return currentVisitList; }
         }
 
-        public ConsultingRoom(int room_id, string doctor_id)
+        public ConsultingRoom(int room_id)
         {
             this.room_id = room_id;
-            Doctor_id = doctor_id;
         }
     }
 }
