@@ -11,19 +11,19 @@ namespace Hopital
     {
         public static void TestCreateVisit()
         {
-            DaoVisite x = new DaoVisitSqlServer();
+            IDaoVisite x = new DaoVisitSqlServer();
             x.Create(new Visit(1, "a", DateTime.Now, 1));
         }
 
         public static void TestDeleteVisit()
         {
-            DaoVisite x = new DaoVisitSqlServer();
+            IDaoVisite x = new DaoVisitSqlServer();
             x.Delete(2);
         }
 
         public static void TestFindByDoctorID()
         {
-            DaoVisite x = new DaoVisitSqlServer();
+            IDaoVisite x = new DaoVisitSqlServer();
             List<Visit> listV = x.FindByDoctorID("a");
             Console.WriteLine("Visit found: {0}", listV.Count);
             foreach (Visit v in listV)
@@ -33,7 +33,7 @@ namespace Hopital
         }
         public static void TestFindByPatientID()
         {
-            DaoVisite x = new DaoVisitSqlServer();
+            IDaoVisite x = new DaoVisitSqlServer();
             List<Visit> listV = x.FindByPatientID(1);
             foreach (Visit v in listV)
             {

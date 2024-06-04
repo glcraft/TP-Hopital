@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Hopital.Model
 {
  
-    interface IDaoStaff : Dao<Staff, int>
+    interface IDaoStaff : IDao<Staff, int>
     {
         Staff Login(string login, string password);
     }
