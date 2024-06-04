@@ -9,10 +9,10 @@ namespace Hopital.Model
     class Visit
     {
         private int id;
-        private int patient_id;
-        private string doctor_id;
+        private int patientId;
+        private string doctorId;
         private DateTime date;
-        private int room_id;
+        private int roomId;
         private const int fee = 23; //prix fixe pour l'instant
 
         public int Id
@@ -20,14 +20,14 @@ namespace Hopital.Model
             get { return id; }
         }
 
-        public int Patient_id
+        public int PatientId
         {
-            get { return patient_id; }
+            get { return patientId; }
         }
 
-        public string Doctor_id
+        public string DoctorId
         {
-            get { return doctor_id; }
+            get { return doctorId; }
         }
 
         public DateTime Date
@@ -35,9 +35,9 @@ namespace Hopital.Model
             get { return date; }
         }
 
-        public int Room_id
+        public int RoomId
         {
-            get { return room_id; }
+            get { return roomId; }
         }
 
         public int Fee
@@ -51,22 +51,22 @@ namespace Hopital.Model
         public Visit(int id, int patient_id, string doctor_id, DateTime date, int room_id, int fee) //constructeur de recuperation
         {
             this.id = id;
-            this.patient_id = patient_id;
-            this.doctor_id = doctor_id;
+            this.patientId = patient_id;
+            this.doctorId = doctor_id;
             this.date = date;
-            this.room_id = room_id;
+            this.roomId = room_id;
         }
         public Visit(int patient_id, string doctor_id, DateTime date, int room_id) //constructeur de creation avec l'auto incremente de l'id
         {
-            this.patient_id = patient_id;
-            this.doctor_id = doctor_id;
+            this.patientId = patient_id;
+            this.doctorId = doctor_id;
             this.date = date;
-            this.room_id = room_id;
+            this.roomId = room_id;
         }
 
         public override string ToString()
         {
-            return "Visit - ID : " +Id+ "\tPatient ID : " +Patient_id+ "\tDoctor ID : " +Doctor_id+ "\tDate : " +Date+ "\tRoom ID : " +Room_id+ "\tFee : " +Fee;
+            return "Visit - ID : " +Id+ "\tPatient ID : " +PatientId+ "\tDoctor ID : " +DoctorId+ "\tDate : " +Date+ "\tRoom ID : " +RoomId+ "\tFee : " +Fee;
         }
     }
 }

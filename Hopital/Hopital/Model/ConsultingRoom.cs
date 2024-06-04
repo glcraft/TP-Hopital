@@ -8,20 +8,20 @@ namespace Hopital.Model
 {
     class ConsultingRoom
     {
-        private int room_id;
-        private string doctor_id;
+        private int roomId;
+        private string doctorId;
         private Visit currentVisit;
         private List<Visit> currentVisitList;
 
         public int Room_id
         {
-            get { return room_id; }
+            get { return roomId; }
         }
 
         public string Doctor_id
         {
-            get { return doctor_id; }
-            set { doctor_id = value; }
+            get { return doctorId; }
+            set { doctorId = value; }
         }
 
         public Visit CurrentVisit
@@ -37,7 +37,7 @@ namespace Hopital.Model
 
         public ConsultingRoom(int room_id)
         {
-            this.room_id = room_id;
+            this.roomId = room_id;
         }
     }
 }

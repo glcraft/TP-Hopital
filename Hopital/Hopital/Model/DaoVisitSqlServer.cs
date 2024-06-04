@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,15 +18,15 @@ namespace Hopital.Model
             SqlCommand command = connection.CreateCommand();
 
             command.CommandText = sql;
-            command.Parameters.Add("patient_id", SqlDbType.Int).Value = v.Patient_id;
-            command.Parameters.Add("doctor_id", SqlDbType.NVarChar).Value = v.Doctor_id;
+            command.Parameters.Add("patient_id", SqlDbType.Int).Value = v.PatientId;
+            command.Parameters.Add("doctor_id", SqlDbType.NVarChar).Value = v.DoctorId;
             command.Parameters.Add("date", SqlDbType.DateTime).Value = v.Date;
-            command.Parameters.Add("room_id", SqlDbType.Int).Value = v.Room_id;
+            command.Parameters.Add("room_id", SqlDbType.Int).Value = v.RoomId;
             command.Parameters.Add("fee", SqlDbType.Int).Value = v.Fee ;
 
             connection.Open();
             command.ExecuteNonQuery();
-            Console.WriteLine("Insertion of a visit in the database.");
+            //Console.WriteLine("Insertion of a visit in the database.");
             connection.Close();
         }
 
@@ -41,10 +41,10 @@ namespace Hopital.Model
             connection.Open();
 
             int nb = command.ExecuteNonQuery();
-            if (nb > 0)
-            {
-                Console.WriteLine("Suppression of visit in the database ID : " + id);
-            }
+            //if (nb > 0)
+            //{
+            //    Console.WriteLine("Suppression of visit in the database ID : " + id);
+            //}
 
             connection.Close();
         }
@@ -68,7 +68,7 @@ namespace Hopital.Model
 
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            Console.WriteLine("Search visits with doctor ID : " + id_doct);
+            //Console.WriteLine("Search visits with doctor ID : " + id_doct);
             while (reader.Read())
             {
                 Visit newV = new Visit(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDateTime(3), reader.GetInt32(4), reader.GetInt32(5));
@@ -92,11 +92,11 @@ namespace Hopital.Model
             SqlCommand command = connection.CreateCommand();
 
             command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE patient_id = @id_pat";
-            command.Parameters.Add("id_pat", SqlDbType.Int).Value = id_pat;
+            command.Parameters.AddWithValue("id_pat", id_pat);
 
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            Console.WriteLine("Search visits with patient ID : " + id_pat);
+            //Console.WriteLine("Search visits with patient ID : " + id_pat);
             while (reader.Read()) 
             {
                 Visit newV = new Visit(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDateTime(3), reader.GetInt32(4), reader.GetInt32(5));
