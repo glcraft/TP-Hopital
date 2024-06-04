@@ -65,7 +65,10 @@
     <Compile Include="Utils\FakeEnvironment.cs" />
     <Compile Include="Views\IDisplay.cs" />
     <Compile Include="Views\DoctorDisplay.cs" />
+    <Compile Include="Views\PatientAllVisitsDisplay.cs" />
     <Compile Include="Views\PatientCheckInDisplay.cs" />
+    <Compile Include="Views\PatientNextDisplay.cs" />
+    <Compile Include="Views\PatientUpdateDisplay.cs" />
     <Compile Include="Views\QueueDisplay.cs" />
     <Compile Include="Views\SecretaryDisplay.cs" />
   </ItemGroup>

@@ -25,7 +25,7 @@ namespace Hopital.Views
             {
 
                 Console.WriteLine(newPatient);
-                Hospital.MyHospital.WaitingQueue.Enqueue(patientId);
+                Hospital.MyHospital.AddPatientToQueue(patientId);
 
             }
             else
@@ -42,10 +42,9 @@ namespace Hopital.Views
                 Console.WriteLine("age :");
                 int age = Convert.ToInt16(Console.ReadLine());
                 Patient p = new Patient(firstname, lastname, address, age, phoneNumber);
-               // p=  new DaoPatientSqlServer().Create(p);
-                
+                int id =  new DaoPatientSqlServer().Create(p);
 
-               //////  inque
+                Hospital.MyHospital.AddPatientToQueue(id);
 
             }
             Console.WriteLine("Patient Adfded in Active Queue");
