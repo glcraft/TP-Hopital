@@ -25,10 +25,10 @@ namespace Hopital.Views
 
                 foreach(ConsultingRoom cr in Hospital.MyHospital.ConsultingRooms)
                 {
-                    if(cr.Room_id == doctor.Job)
+                    if(cr.RoomId == doctor.Job)
                     {
-                        cr.Doctor_id = doctor.Login;
-                        Console.WriteLine("ID de la consulting room : " +cr.Room_id+ "\tDoctor id : " +cr.Doctor_id);
+                        cr.DoctorId = doctor.Login;
+                        Console.WriteLine("ID de la consulting room : " +cr.RoomId+ "\tDoctor id : " +cr.DoctorId);
                     }
                 }
 
@@ -55,7 +55,7 @@ namespace Hopital.Views
                     case 2:
                         foreach(ConsultingRoom cro in Hospital.MyHospital.ConsultingRooms)
                         {
-                            if(cro.Doctor_id == doctor.Login)
+                            if(cro.DoctorId == doctor.Login)
                             {
                                 cro.CreateCurrentVisit();
                             }
@@ -66,7 +66,7 @@ namespace Hopital.Views
                     case 3:
                         foreach (ConsultingRoom cro in Hospital.MyHospital.ConsultingRooms)
                         {
-                            if (cro.Doctor_id == doctor.Login)
+                            if (cro.DoctorId == doctor.Login)
                             {
                                 cro.GetCurrentVisitList();
                             }
@@ -75,7 +75,7 @@ namespace Hopital.Views
                     case 4:
                         foreach (ConsultingRoom cro in Hospital.MyHospital.ConsultingRooms)
                         {
-                            if (cro.Doctor_id == doctor.Login)
+                            if (cro.DoctorId == doctor.Login)
                             {
                                 cro.SaveCurrentVisitList();
                             }

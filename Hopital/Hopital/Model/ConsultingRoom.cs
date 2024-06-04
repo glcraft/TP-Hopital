@@ -13,12 +13,12 @@ namespace Hopital.Model
         private Visit currentVisit;
         private List<Visit> currentVisitList;
 
-        public int Room_id
+        public int RoomId
         {
             get { return roomId; }
         }
 
-        public string Doctor_id
+        public string DoctorId
         {
             get { return doctorId; }
             set { doctorId = value; }
@@ -44,12 +44,12 @@ namespace Hopital.Model
 
         public override string ToString()
         {
-            return "ConsultingRoom number : " +Room_id;
+            return "ConsultingRoom number : " +RoomId;
         }
 
         public bool CreateCurrentVisit()
         {
-            Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Dequeue(), Doctor_id, DateTime.Now, Room_id);
+            Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Dequeue(), DoctorId, DateTime.Now, RoomId);
             CurrentVisit = newV;
             CurrentVisitList.Add(CurrentVisit);
 
