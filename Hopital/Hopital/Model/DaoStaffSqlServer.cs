@@ -80,7 +80,7 @@ namespace Hopital.Model
            
             Staff user = null;
 
-            string sql = "SELECT * FROM Staffs WHERE login = @login AND password = @password";
+            string sql = "SELECT TOP 1 * FROM Staffs WHERE login = @login AND password = @password";
 
             //SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(sql, connection);
@@ -89,7 +89,7 @@ namespace Hopital.Model
             command.Parameters.AddWithValue("@password", passwordToFind);
             SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
+            if (reader.Read())
             {
                 string login = reader.GetString(0);
                 string password = reader.GetString(1);
@@ -105,7 +105,6 @@ namespace Hopital.Model
                 }
                 else if (job == -1)
                 {
-                    continue;
                     // staffMember = new Doctor(login, password, name, job);
                 }
 
