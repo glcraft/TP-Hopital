@@ -62,7 +62,7 @@ namespace Hopital.Model
             SqlConnection connection = SqlServer.Get().Connection;
             SqlCommand command = connection.CreateCommand();
 
-            command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE doctor_id = @id_doct";
+            command.CommandText = "SELECT * FROM Visits WHERE doctor_id = @id_doct";
             command.Parameters.AddWithValue("id_doct", id_doct);
 
             connection.Open();
@@ -70,7 +70,15 @@ namespace Hopital.Model
             //Console.WriteLine("Search visits with doctor ID : " + id_doct);
             while (reader.Read())
             {
-                Visit newV = new Visit(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDateTime(3), reader.GetInt32(4), reader.GetInt32(5));
+                Visit newV = new Visit(
+                    (int)reader["id"],
+                    (int)reader["patient_id"],
+                    (int)reader["wait_time"],
+                    (string)reader["doctor_id"],
+                    (DateTime)reader["id"],
+                    (int)reader["room_id"],
+                    (int)reader["fee"]
+                );
                 listeV.Add(newV);
             }
             connection.Close();
@@ -90,7 +98,7 @@ namespace Hopital.Model
             SqlConnection connection = SqlServer.Get().Connection;
             SqlCommand command = connection.CreateCommand();
 
-            command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE patient_id = @id_pat";
+            command.CommandText = "SELECT * FROM Visits WHERE patient_id = @id_pat";
             command.Parameters.AddWithValue("id_pat", id_pat);
 
             connection.Open();
@@ -98,7 +106,15 @@ namespace Hopital.Model
             //Console.WriteLine("Search visits with patient ID : " + id_pat);
             while (reader.Read()) 
             {
-                Visit newV = new Visit(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDateTime(3), reader.GetInt32(4), reader.GetInt32(5));
+                Visit newV = new Visit(
+                    (int)reader["id"],
+                    (int)reader["patient_id"],
+                    (int)reader["wait_time"],
+                    (string)reader["doctor_id"],
+                    (DateTime)reader["id"],
+                    (int)reader["room_id"],
+                    (int)reader["fee"]
+                );
                 listeV.Add(newV);
             }
             connection.Close();

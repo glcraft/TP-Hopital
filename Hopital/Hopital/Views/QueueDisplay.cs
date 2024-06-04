@@ -8,9 +8,9 @@ namespace Hopital.Views
         public void Display()
         {
             Console.WriteLine(" --- Actually waiting for consultation : \n");
-            foreach (int elt in Hospital.MyHospital.WaitingQueue)
+            foreach (var elt in Hospital.MyHospital.WaitingQueue.Raw)
             {
-                Console.WriteLine(new DaoPatientSqlServer().FindById(elt));
+                Console.WriteLine(new DaoPatientSqlServer().FindById(elt.value));
             }
             Console.WriteLine();
             

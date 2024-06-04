@@ -13,7 +13,7 @@ namespace Hopital
         public static void TestCreateVisit()
         {
             IDaoVisite x = new DaoVisitSqlServer();
-            x.Create(new Visit(1, "a", DateTime.Now, 1));
+            x.Create(new Visit(1, 120, "a", DateTime.Now, 1));
         }
 
         public static void TestDeleteVisit()
