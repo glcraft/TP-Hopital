@@ -53,8 +53,7 @@ namespace Hopital.Model
                 }
                 else if (job == -1)
                 {
-                    continue;
-                   // staffMember = new Doctor(login, password, name, job);
+                   staffMember = new Admin(login, password, name, job);
                 }
 
                 staffList.Add(staffMember);
@@ -103,7 +102,7 @@ namespace Hopital.Model
                 }
                 else if (job == -1)
                 {
-                    // staffMember = new Doctor(login, password, name, job);
+                    user = new Admin(login, password, name, job);
                 }
 
             }

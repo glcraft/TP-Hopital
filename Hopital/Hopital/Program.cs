@@ -118,6 +118,7 @@ namespace Hopital
                 Staff user = null;
                 user = new DaoStaffSqlServer().Login(username, password);
 
+
                 if (user != null)
                 {
                     Hospital.MyHospital.ActiveStaff.Add(user);
@@ -128,7 +129,6 @@ namespace Hopital
                         Console.WriteLine(s.Name);
                     }
 
-
                     switch (user)
                     {
                         case Doctor doctor:
@@ -136,6 +136,9 @@ namespace Hopital
                             break;
                         case Secretary secretary:
                             new SecretaryDisplay(secretary).Display();
+                            break;
+                        case Admin admin:
+                            new AdminDisplay(admin).Display();
                             break;
                         default:
                             Console.WriteLine("Unknown staff type.");
