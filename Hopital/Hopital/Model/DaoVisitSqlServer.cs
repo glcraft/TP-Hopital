@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,10 +61,8 @@ namespace Hopital.Model
             SqlConnection connection = SqlServer.Get().Connection;
             SqlCommand command = connection.CreateCommand();
 
-            //command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE doctor_id LIKE '@id_doct'";
-            //command.Parameters.Add("id_doct", SqlDbType.NVarChar).Value = id_doct;
-
-            command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE doctor_id LIKE '" + id_doct+ "'";
+            command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE doctor_id = @id_doct";
+            command.Parameters.AddWithValue("id_doct", id_doct);
 
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
