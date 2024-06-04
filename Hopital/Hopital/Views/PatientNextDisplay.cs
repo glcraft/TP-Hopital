@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Hopital.Model;
 
 namespace Hopital.Views
@@ -7,11 +7,16 @@ namespace Hopital.Views
     {
         public void Display()
         {
-            int next = Hospital.MyHospital.WaitingQueue.Peek();
-            TimeSpan waitTime = Hospital.MyHospital.WaitingQueue.TimeSinceNow();
-            Patient p = new DaoPatientSqlServer().FindById(next);
-            Console.WriteLine(" --- Next Patient :");
-            Console.WriteLine($"{p} (waiting for {waitTime})");
+            Console.WriteLine(" --- Next Patient : \n");
+            if (Hospital.MyHospital.WaitingQueue.Count > 0)
+            {
+                int next = Hospital.MyHospital.WaitingQueue.Peek();
+                TimeSpan waitTime = Hospital.MyHospital.WaitingQueue.TimeSinceNow();
+                Patient p = new DaoPatientSqlServer().FindById(next);
+                Console.WriteLine($"{p} (waiting for {waitTime})");
+            }
+            else Console.WriteLine(" +++++++++++ No Patient in the queue +++++++++++");
+
             Console.WriteLine();
         }
     }

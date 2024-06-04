@@ -73,6 +73,8 @@
     <Compile Include="Views\PatientDeleteDisplay.cs" />
     <Compile Include="Views\PatientNextDisplay.cs" />
     <Compile Include="Views\PatientSeeAll.cs" />
+    <Compile Include="Views\PatientSpecificDisplay.cs" />
+    <Compile Include="Views\PatientUpdateAllDisplay.cs" />
     <Compile Include="Views\PatientUpdateDisplay.cs" />
     <Compile Include="Views\QueueDisplay.cs" />
     <Compile Include="Views\SecretaryDisplay.cs" />

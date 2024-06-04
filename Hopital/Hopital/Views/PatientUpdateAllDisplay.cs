@@ -3,7 +3,7 @@ using Hopital.Model;
 
 namespace Hopital.Views
 {
-    class PatientUpdateDisplay : IDisplay
+    class PatientUpdateAllDisplay : IDisplay
     {
         public void Display()
         {
@@ -15,10 +15,31 @@ namespace Hopital.Views
             if (currentPatient == null)
                 return;
             // patient info 
+            string firstname = currentPatient.Firstname;
+            string lastname = currentPatient.Lastname;
             string phoneNumber = currentPatient.PhoneNumber;
             string address = currentPatient.Address;
+            int age = currentPatient.Age;
 
-            Console.WriteLine($" {currentPatient.Firstname} {currentPatient.Lastname}, Actually :");
+            Console.WriteLine($" Patient id n° {patientId}, Actually :");
+
+            Console.WriteLine($"Current firstname of the patient: {firstname}");
+            Console.Write($" Enter new firstname (leave empty for no modification) : ");
+            string newfirstname = Console.ReadLine();
+            if (newfirstname.Length > 0)
+                currentPatient.Firstname = newfirstname;
+
+            Console.WriteLine($"Current lastname of the patient: {lastname}");
+            Console.Write($" Enter new lastname (leave empty for no modification) : ");
+            string newlastname = Console.ReadLine();
+            if (newlastname.Length > 0)
+                currentPatient.Lastname = newlastname;
+
+            Console.WriteLine($"Current age of the patient: {age}");
+            Console.Write($" Enter new age (leave empty for no modification) : ");
+            string newAge = (Console.ReadLine());
+            if (newAge.Length > 0)
+                currentPatient.Age = Convert.ToUInt16(newAge);
 
             Console.WriteLine($"Current address of the patient: {address}");
             Console.Write($" Enter new address (leave empty for no modification) : ");
@@ -33,7 +54,7 @@ namespace Hopital.Views
                 currentPatient.PhoneNumber = newPhoneNumber;
 
             new DaoPatientSqlServer().Update(currentPatient);
-            
+
             Console.WriteLine($"Patient updated: {currentPatient}");
         }
     }

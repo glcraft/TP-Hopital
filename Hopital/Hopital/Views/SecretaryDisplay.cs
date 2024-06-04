@@ -19,12 +19,9 @@ namespace Hopital.Views
         public void Display()
         {
             bool logout = false;
-
-
-
             while (!logout)
             {
-                Console.WriteLine($"Hello Miss {secretary.Name} you are logged as a secretary.");
+                Console.WriteLine($"Miss {secretary.Name} you are logged as a secretary.");
                 Console.WriteLine($"-----------------------------------");
                 Console.WriteLine($" 1 - Inqueue a new patient");
                 Console.WriteLine($" 2 - Display the queue");
@@ -36,6 +33,7 @@ namespace Hopital.Views
                 Console.Write($"\n--> Your choise : ");
 
                 int resp = Convert.ToInt16(Console.ReadLine());
+                Console.Clear();
                 switch (resp)
                 {
                     case 1:

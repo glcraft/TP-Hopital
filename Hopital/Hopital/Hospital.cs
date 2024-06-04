@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,7 +53,7 @@ namespace Hopital
 
         private Hospital()
         {
-            Console.WriteLine("creation de l'hopital");
+
             ActiveStaff = new List<Staff>();
             WaitingQueue = new QueueTimed<int>();
             ConsultingRooms = new List<ConsultingRoom>();
@@ -99,7 +99,6 @@ namespace Hopital
         // Queue de id de patient
         public QueueTimed<int> WaitingQueue { get; }
         public List<Staff> ActiveStaff { get; }
-
         public List<ConsultingRoom> ConsultingRooms { get; }
     }
 }

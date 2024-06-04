@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Hopital.Model;
 
 namespace Hopital.Views
@@ -12,6 +12,7 @@ namespace Hopital.Views
             {
                 Console.WriteLine(new DaoPatientSqlServer().FindById(elt.value));
             }
+            else Console.WriteLine(" +++++++++++ No Patient in the queue +++++++++++");
             Console.WriteLine();
             
         }

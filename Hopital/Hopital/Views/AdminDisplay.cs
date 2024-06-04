@@ -17,11 +17,11 @@ namespace Hopital.Views
         public void Display()
         {
             bool logout = false;
+
             while (!logout)
             {
-                Console.WriteLine(admin);
-
-                Console.WriteLine("\n" + $"Hello {admin.Name} you are logged as an administrateur.");
+              
+                Console.WriteLine("\n" + $"{admin.Name} you are logged as an administrateur.");
 
                 Console.WriteLine($"-----------------------------------");
                 Console.WriteLine();
@@ -35,6 +35,7 @@ namespace Hopital.Views
                 Console.Write($"\n--> Your choise : ");
 
                 int resp = Convert.ToInt16(Console.ReadLine());
+                Console.Clear();
                 switch (resp)
                 {
                     case 1:
@@ -43,8 +44,14 @@ namespace Hopital.Views
                     case 2:
                         new PatientDeleteDisplay().Display();
                         break;
+                    case 3:
+                        new PatientUpdateAllDisplay().Display();
+                        break;
                     case 4:
                         new PatientSeeAllDisplay().Display();
+                        break;
+                    case 5:
+                        new PatientSpecificDisplay().Display();
                         break;
                     case 10:
                         logout = true;
