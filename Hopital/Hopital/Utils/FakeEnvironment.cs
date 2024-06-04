@@ -34,7 +34,10 @@ namespace Hopital.Utils
             Init();
             string envVar = null;
             if (fakeEnv != null)
-                envVar = fakeEnv[variable];
+            {
+                if (!fakeEnv.TryGetValue(variable, out envVar))
+                    envVar = null;
+            }
             if (envVar != null)
                 return envVar;
             envVar = Environment.GetEnvironmentVariable(variable);
