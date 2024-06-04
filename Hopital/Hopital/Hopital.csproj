@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CyrilleTests.cs" />
     <Compile Include="Model\ConsultingRoom.cs" />
     <Compile Include="Hospital.cs" />
     <Compile Include="Model\DaoStaffSqlServer.cs" />
@@ -62,6 +63,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Exceptions.cs" />
     <Compile Include="Utils\FakeEnvironment.cs" />
+    <Compile Include="Views\IDisplay.cs" />
+    <Compile Include="Views\DoctorDisplay.cs" />
+    <Compile Include="Views\PatientCheckInDisplay.cs" />
+    <Compile Include="Views\QueueDisplay.cs" />
+    <Compile Include="Views\SecretaryDisplay.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
