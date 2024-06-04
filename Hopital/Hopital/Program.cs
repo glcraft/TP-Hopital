@@ -81,8 +81,8 @@ namespace Hopital
                 }
 
                 Console.WriteLine("Do you want shut down the application  y/n ?");
-                char resp = Convert.ToChar(Console.ReadLine());
-                if (resp == 'y') goOn = false;
+                string resp = Console.ReadLine();
+                if (resp == "y") goOn = false;
                 Console.Clear();
             } while (goOn);
         }
