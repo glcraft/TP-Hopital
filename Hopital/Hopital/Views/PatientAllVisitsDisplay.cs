@@ -11,23 +11,20 @@ namespace Hopital.Views
     {
         public void Display()
         {
-            Console.WriteLine(" Patient Id svp :");
-            int patientId = Convert.ToInt16(Console.ReadLine());
-            List < Visit > myVisits = new DaoVisitSqlServer().FindByPatientID(patientId);
+            Console.WriteLine(" Enter the patient ID :");
+            int patientId = Convert.ToInt32(Console.ReadLine());
+            List<Visit> myVisits = new DaoVisitSqlServer().FindByPatientID(patientId);
 
             if (myVisits.Count==0)
             {
-                Console.WriteLine(" Sorry no visits for you");
+                Console.WriteLine($" Sorry, no visits for patient {patientId}");
+                return;
             }
-            else
+            Console.WriteLine($" Visits for patient {patientId}:");
+            foreach (Visit v in myVisits)
             {
-                Console.WriteLine(" Here are your visits :");
-                foreach (Visit v in myVisits)
-                {
-                    Console.WriteLine($" - {v.Date} - Doctor {v.DoctorId}");
-                }
+                Console.WriteLine($" - {v.Date} - Doctor {v.DoctorId}");
             }
-
         }
     }
 }
