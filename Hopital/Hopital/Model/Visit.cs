@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hopital.Model
 {
-    class Visit
+    public class Visit
     {
         private int id;
         private int patientId;

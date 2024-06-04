@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hopital.Model
 {
-    class ConsultingRoom
+    public class ConsultingRoom
     {
         private int roomId;
         private string doctorId;
@@ -38,6 +38,20 @@ namespace Hopital.Model
         public ConsultingRoom(int room_id)
         {
             this.roomId = room_id;
+        }
+
+        public override string ToString()
+        {
+            return "ConsultingRoom number : " +Room_id;
+        }
+
+        public bool CreateCurrentVisit()
+        {
+            Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Peek(), Doctor_id, DateTime.Now, Room_id);
+            CurrentVisit = newV;
+            CurrentVisitList.Add(CurrentVisit);
+            Console.WriteLine(CurrentVisit.ToString());
+            return true;
         }
     }
 }

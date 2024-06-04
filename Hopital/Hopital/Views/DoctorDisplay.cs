@@ -23,6 +23,15 @@ namespace Hopital.Views
             {
                 Console.WriteLine(doctor);
 
+                foreach(ConsultingRoom cr in Hospital.MyHospital.ConsultingRooms)
+                {
+                    if(cr.Room_id == doctor.Job)
+                    {
+                        cr.Doctor_id = doctor.Login;
+                        Console.WriteLine("ID de la consulting room : " +cr.Room_id+ "\tDoctor id : " +cr.Doctor_id);
+                    }
+                }
+
                 Console.WriteLine("\n" + $"Hello Doctor {doctor.Name} you are logged as a doctor.");
 
                 Console.WriteLine($"-----------------------------------");
@@ -42,6 +51,15 @@ namespace Hopital.Views
                 {
                     case 1:
                         new QueueDisplay().Display();
+                        break;
+                    case 2:
+                        foreach(ConsultingRoom cro in Hospital.MyHospital.ConsultingRooms)
+                        {
+                            if(cro.Doctor_id == doctor.Login)
+                            {
+                                cro.CreateCurrentVisit();
+                            }
+                        }
                         break;
                     case 10:
                         logout = true;

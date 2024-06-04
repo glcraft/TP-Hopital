@@ -111,6 +111,31 @@ namespace Hopital.Model
             return user;
         }
 
+        public int NumberOfRoom()
+        {
+            string sql = "SELECT COUNT(DISTINCT job) FROM Staffs WHERE job > 0";
+            SqlCommand command = new SqlCommand(sql, connection);
+            connection.Open();
+            int nbRoom = Convert.ToInt32(command.ExecuteScalar());
+            connection.Close();
+            return nbRoom;
+        }
 
+        public List<int> ListOfRoomNumber()
+        {
+            List<int> listI = new List<int>();
+
+            string sql = "SELECT DISTINCT job FROM Staffs WHERE job > 0";
+            SqlCommand command = new SqlCommand(sql, connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                int newI = reader.GetInt32(0);
+                listI.Add(newI);
+            }
+            connection.Close();
+            return listI;
+        }
     }
 }

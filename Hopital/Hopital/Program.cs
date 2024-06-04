@@ -55,6 +55,20 @@ namespace Hopital
         {
             Console.WriteLine(new DaoStaffSqlServer().Login("a", "a"));
         }
+
+        public static void TestNumberOfRoom()
+        {
+            Console.WriteLine(new DaoStaffSqlServer().NumberOfRoom());
+        }
+        public static void TestListOfRoomNumber()
+        {
+            List<int> liste = new DaoStaffSqlServer().ListOfRoomNumber();
+            foreach(int i in liste)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
     }
 
     class TestPatient
@@ -78,6 +92,10 @@ namespace Hopital
         static void Main(string[] args)
         {
             NewLogin();
+            //TestStaff.TestListOfRoomNumber();
+            //List<ConsultingRoom> listeC = Hospital.MyHospital.ConsultingRooms;
+            //Console.WriteLine(listeC.Count);
+            //listeC[0].ToString();
         }
         static void NewLogin()
         {

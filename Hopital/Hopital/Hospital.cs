@@ -19,6 +19,16 @@ namespace Hopital
             Console.WriteLine("creation de l'hopital");
             ActiveStaff = new List<Staff>();
             WaitingQueue = new Queue<int>();
+            ConsultingRooms = new List<ConsultingRoom>();
+
+            List<int> listeI = new DaoStaffSqlServer().ListOfRoomNumber();
+            //Console.WriteLine(listeI.Count);
+            for (int i = 0; i < new DaoStaffSqlServer().NumberOfRoom(); i++)
+            {
+                ConsultingRoom newCR = new ConsultingRoom(listeI[i]);
+                //Console.WriteLine(newCR.ToString());
+                ConsultingRooms.Add(newCR);
+            }
         }
 
         public static  Hospital MyHospital
@@ -46,6 +56,8 @@ namespace Hopital
         // Queue de id de patient
         public Queue<int> WaitingQueue { get; }
         public List<Staff> ActiveStaff { get; }
+
+        public List<ConsultingRoom> ConsultingRooms { get; }
     }
 }
 
