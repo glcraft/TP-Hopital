@@ -55,6 +55,23 @@ namespace Hopital
             Console.WriteLine(new DaoStaffSqlServer().Login("a", "a"));
         }
     }
+
+    class TestPatient
+    {
+        public static void CreatePatient()
+        {
+            new DaoPatientSqlServer().Create(new Patient("Jean", "DURANT", "3 rue des brions", 34, "0123456789"));
+        }
+        public static void FindAllPatient()
+        {
+            List<Patient> pats = new DaoPatientSqlServer().FindAll();
+            Console.WriteLine("Number of patient: {0}", pats.Count);
+            foreach (Patient pat in pats)
+            {
+                Console.WriteLine("- {0}", pat);
+            }
+        }
+    }
     class Program
     {
         static void Main(string[] args)
