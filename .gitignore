@@ -4,3 +4,4 @@
 **/obj
 .env
 *.csproj.user
+patients_log.txt

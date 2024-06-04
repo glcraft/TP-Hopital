@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using Hopital.Model;
 
@@ -31,8 +32,20 @@ namespace Hopital
                 return myHospital;
             }
         }
+
+        public void AddPatientToQueue(int patient_id)
+        {
+            DateTime now = DateTime.Now;
+
+            using (StreamWriter file = File.AppendText("patients_log.txt"))
+            {
+                file.WriteLine($"{patient_id},{now.ToShortDateString()},{now.ToLongTimeString()}");
+            }
+            WaitingQueue.Enqueue(patient_id);
+        }
         // Queue de id de patient
         public Queue<int> WaitingQueue { get; }
         public List<Staff> ActiveStaff { get; }
     }
 }
+
