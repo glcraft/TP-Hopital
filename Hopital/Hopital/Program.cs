@@ -52,6 +52,15 @@ namespace Hopital
 
                 if (user != null)
                 {
+                    Hospital.MyHospital.ActiveStaff.Add(user);
+
+                    Console.WriteLine("Active Staff  : ");
+                    foreach (Staff s in Hospital.MyHospital.ActiveStaff)
+                    {
+                        Console.WriteLine(s.Name);
+                    }
+
+
                     switch (user)
                     {
                         case Doctor doctor:
@@ -83,6 +92,7 @@ namespace Hopital
             bool logout = false;
             while (!logout)
             {
+                Console.WriteLine (doctor);
 
                 Console.WriteLine("\n"+$"Hello Doctor {doctor.Name} you are logged as a doctor.");
                 
@@ -95,12 +105,18 @@ namespace Hopital
                 Console.WriteLine($" 4 - Save lasts visits in DB");
                 Console.WriteLine($" 5 - See all recorded visits (from db)");
                 Console.WriteLine($" 10 - Logout");
+                Console.WriteLine($" 11 - Quit service");
                 Console.Write($"\n--> Your choise : ");
 
                 int resp = Convert.ToInt16(Console.ReadLine());
                 switch (resp)
                 {
                     case 10:
+                        logout = true;
+                        break;
+                    case 11:
+                        Staff toremove = Hospital.MyHospital.ActiveStaff.Find( r => r.Login == doctor.Login );
+                        Hospital.MyHospital.ActiveStaff.Remove(toremove);
                         logout = true;
                         break;
                     default:
@@ -116,8 +132,6 @@ namespace Hopital
 
             Hospital.MyHospital.WaitingQueue.Enqueue(1);
 
-
-
             while (!logout)
             {
                 Console.WriteLine($"Hello Miss {secretary.Name} you are logged as a secretary.");
@@ -128,6 +142,7 @@ namespace Hopital
                 Console.WriteLine($" 4 - Display all visits of a patient");
                 Console.WriteLine($" 5 - Update patient information");
                 Console.WriteLine($" 10 - Logout");
+                Console.WriteLine($" 11 - Quit service");
                 Console.Write($"\n--> Your choise : ");
 
                 int resp = Convert.ToInt16(Console.ReadLine());
@@ -141,8 +156,9 @@ namespace Hopital
                         break;
                 }
             }
-
         }
+
+
 
 
 

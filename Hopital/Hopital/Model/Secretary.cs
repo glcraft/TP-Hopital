@@ -12,5 +12,10 @@ namespace Hopital.Model
            : base(login, password, name, job)
         {
         }
+
+        public override string ToString()
+        {
+            return base.ToString()+ " I am a secretary.";
+        } 
     }
 }
