@@ -13,20 +13,20 @@ namespace Hopital
         {
             //TestCreateVisit();
             //TestDeleteVisit();
-            //TestFindByDoctorID();
-            TestFindByPatientID();
+            TestFindByDoctorID();
+            //TestFindByPatientID();
         }
 
         static void TestCreateVisit()
         {
             DaoVisite x = new DaoVisitSqlServer();
-            x.Create(new Visit(1, "123456", DateTime.Now, 1, 25));
+            x.Create(new Visit(1, "123456", DateTime.Now, 1));
         }
 
         static void TestDeleteVisit()
         {
             DaoVisite x = new DaoVisitSqlServer();
-            x.Delete(1);
+            x.Delete(2);
         }
 
         static void TestFindByDoctorID()

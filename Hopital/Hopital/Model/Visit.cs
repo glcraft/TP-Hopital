@@ -13,7 +13,7 @@ namespace Hopital.Model
         private string doctor_id;
         private DateTime date;
         private int room_id;
-        private int fee;
+        private const int fee = 23; //prix fixe pour l'instant
 
         public int Id
         {
@@ -55,15 +55,13 @@ namespace Hopital.Model
             this.doctor_id = doctor_id;
             this.date = date;
             this.room_id = room_id;
-            this.fee = fee;
         }
-        public Visit(int patient_id, string doctor_id, DateTime date, int room_id, int fee) //constructeur de creation avec l'auto incremente de l'id
+        public Visit(int patient_id, string doctor_id, DateTime date, int room_id) //constructeur de creation avec l'auto incremente de l'id
         {
             this.patient_id = patient_id;
             this.doctor_id = doctor_id;
             this.date = date;
             this.room_id = room_id;
-            this.fee = fee;
         }
 
         public override string ToString()
