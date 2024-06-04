@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +10,12 @@ namespace Hopital.Views
     class DoctorDisplay : IDisplay
     {
         Doctor doctor ;
+        ConsultingRoom consultingRoom;
 
-       public  DoctorDisplay(Doctor doc)
+        public  DoctorDisplay(Doctor doc)
         {
-            this.doctor = doc;
+            doctor = doc;
+            consultingRoom = Hospital.MyHospital.ConsultingRooms.Find(cr => cr.RoomId == doctor.Job);
         }
 
         public void Display()
@@ -23,14 +25,7 @@ namespace Hopital.Views
             {
                 Console.WriteLine(doctor);
 
-                foreach(ConsultingRoom cr in Hospital.MyHospital.ConsultingRooms)
-                {
-                    if(cr.RoomId == doctor.Job)
-                    {
-                        cr.DoctorId = doctor.Login;
-                        Console.WriteLine("ID de la consulting room : " +cr.RoomId+ "\tDoctor id : " +cr.DoctorId);
-                    }
-                }
+                Console.WriteLine($"ID de la consulting room : {consultingRoom.RoomId}\tDoctor id : {consultingRoom.DoctorId}");
 
                 Console.WriteLine("\n" + $"Hello Doctor {doctor.Name} you are logged as a doctor.");
 
@@ -53,33 +48,13 @@ namespace Hopital.Views
                         new QueueDisplay().Display();
                         break;
                     case 2:
-                        foreach(ConsultingRoom cro in Hospital.MyHospital.ConsultingRooms)
-                        {
-                            if(cro.DoctorId == doctor.Login)
-                            {
-                                cro.CreateCurrentVisit();
-                            }
-                        }
-
-                        
+                        consultingRoom.CreateCurrentVisit();
                         break;
                     case 3:
-                        foreach (ConsultingRoom cro in Hospital.MyHospital.ConsultingRooms)
-                        {
-                            if (cro.DoctorId == doctor.Login)
-                            {
-                                cro.GetCurrentVisitList();
-                            }
-                        }
+                        consultingRoom.GetCurrentVisitList();
                         break;
                     case 4:
-                        foreach (ConsultingRoom cro in Hospital.MyHospital.ConsultingRooms)
-                        {
-                            if (cro.DoctorId == doctor.Login)
-                            {
-                                cro.SaveCurrentVisitList();
-                            }
-                        }
+                        consultingRoom.SaveCurrentVisitList();
                         break;
                     case 10:
                         logout = true;
