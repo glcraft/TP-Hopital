@@ -11,7 +11,9 @@ namespace Hopital.Views
     {
         public void Display()
         {
-            throw new NotImplementedException();
+            Console.WriteLine(" Patient Id svp :");
+            int patientId = Convert.ToInt16(Console.ReadLine());
+            new DaoPatientSqlServer().Delete(patientId);
         }
     }
 }

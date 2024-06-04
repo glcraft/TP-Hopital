@@ -40,6 +40,12 @@ namespace Hopital.Views
                     case 1:
                         new PatientAddNewDisplay().Display();
                         break;
+                    case 2:
+                        new PatientDeleteDisplay().Display();
+                        break;
+                    case 4:
+                        new PatientSeeAllDisplay().Display();
+                        break;
                     case 10:
                         logout = true;
                         break;
