@@ -33,11 +33,13 @@ namespace Hopital.Model
         public List<Visit> CurrentVisitList
         {
             get { return currentVisitList; }
+            set { currentVisitList = value; }
         }
 
         public ConsultingRoom(int room_id)
         {
             this.roomId = room_id;
+            CurrentVisitList = new List<Visit>();
         }
 
         public override string ToString()
@@ -47,11 +49,42 @@ namespace Hopital.Model
 
         public bool CreateCurrentVisit()
         {
-            Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Peek(), Doctor_id, DateTime.Now, Room_id);
+            Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Dequeue(), Doctor_id, DateTime.Now, Room_id);
             CurrentVisit = newV;
             CurrentVisitList.Add(CurrentVisit);
+
+            if(CurrentVisitList.Count == 5)
+            {
+                SaveCurrentVisitList();
+            }
+
             Console.WriteLine(CurrentVisit.ToString());
             return true;
+        }
+
+        public void GetCurrentVisitList()
+        {
+            if (CurrentVisitList.Count > 0)
+            {
+               foreach (Visit v in CurrentVisitList)
+               {
+                   Console.WriteLine(v.ToString());
+               }
+            }
+        }
+
+        public void SaveCurrentVisitList()
+        {
+            IDaoVisite x = new DaoVisitSqlServer();
+
+            if(CurrentVisitList.Count > 0)
+            {
+                foreach (Visit v in CurrentVisitList)
+                {
+                    x.Create(v);
+                }
+            }
+            currentVisitList.Clear();
         }
     }
 }

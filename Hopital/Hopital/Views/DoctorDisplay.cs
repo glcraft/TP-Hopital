@@ -60,6 +60,26 @@ namespace Hopital.Views
                                 cro.CreateCurrentVisit();
                             }
                         }
+
+                        
+                        break;
+                    case 3:
+                        foreach (ConsultingRoom cro in Hospital.MyHospital.ConsultingRooms)
+                        {
+                            if (cro.Doctor_id == doctor.Login)
+                            {
+                                cro.GetCurrentVisitList();
+                            }
+                        }
+                        break;
+                    case 4:
+                        foreach (ConsultingRoom cro in Hospital.MyHospital.ConsultingRooms)
+                        {
+                            if (cro.Doctor_id == doctor.Login)
+                            {
+                                cro.SaveCurrentVisitList();
+                            }
+                        }
                         break;
                     case 10:
                         logout = true;

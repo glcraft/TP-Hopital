@@ -23,7 +23,7 @@ namespace Hopital
 
             List<int> listeI = new DaoStaffSqlServer().ListOfRoomNumber();
             //Console.WriteLine(listeI.Count);
-            for (int i = 0; i < new DaoStaffSqlServer().NumberOfRoom(); i++)
+            for (int i = 0; i < listeI.Count; i++)
             {
                 ConsultingRoom newCR = new ConsultingRoom(listeI[i]);
                 //Console.WriteLine(newCR.ToString());
