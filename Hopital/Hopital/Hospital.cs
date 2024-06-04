@@ -12,9 +12,6 @@ namespace Hopital
     public class Hospital
     {
         private  static Hospital myHospital = null;
-        private Queue<int> waitingQueue = new Queue<int>();
-        private List<Staff> activeStaff = new List<Staff>();
-
 
         private Hospital()
         {
@@ -33,7 +30,7 @@ namespace Hopital
             }
         }
         // Queue de id de patient
-        public Queue<int> WaitingQueue { get => waitingQueue; set => waitingQueue = value; }
-        public List<Staff> ActiveStaff { get => activeStaff; set => activeStaff = value; }
+        public Queue<int> WaitingQueue { get; }
+        public List<Staff> ActiveStaff { get; }
     }
 }
