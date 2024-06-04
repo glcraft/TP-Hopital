@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
@@ -11,7 +11,7 @@ namespace Hopital.Model
     {
         SqlConnection connection = SqlServer.Get().Connection;
 
-        public void Create(Staff obj)
+        public string Create(Staff obj)
         {
             throw new NotImplementedException();
         }

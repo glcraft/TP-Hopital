@@ -10,9 +10,9 @@ namespace Hopital.Model
 {
     class DaoVisitSqlServer : IDaoVisite
     {
-        public void Create(Visit v)
+        public int Create(Visit v)
         {
-            string sql = "INSERT INTO Visits values (@patient_id, @doctor_id, @date, @room_id, @fee)";
+            string sql = "INSERT INTO Visits OUTPUT INSERTED.ID values (@patient_id, @doctor_id, @date, @room_id, @fee)";
 
             SqlConnection connection = SqlServer.Get().Connection;
             SqlCommand command = connection.CreateCommand();
@@ -25,9 +25,10 @@ namespace Hopital.Model
             command.Parameters.Add("fee", SqlDbType.Int).Value = v.Fee ;
 
             connection.Open();
-            command.ExecuteNonQuery();
+            int id = (int)command.ExecuteScalar();
             //Console.WriteLine("Insertion of a visit in the database.");
             connection.Close();
+            return id;
         }
 
         public void Delete(int id)
