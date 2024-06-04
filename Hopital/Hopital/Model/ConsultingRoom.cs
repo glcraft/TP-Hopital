@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,18 +49,26 @@ namespace Hopital.Model
 
         public bool CreateCurrentVisit()
         {
-            int waitSec = (int)Hospital.MyHospital.WaitingQueue.TimeSinceNow().TotalSeconds;
-            Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Dequeue(), waitSec, DoctorId, DateTime.Now, RoomId);
-            CurrentVisit = newV;
-            CurrentVisitList.Add(CurrentVisit);
-
-            if(CurrentVisitList.Count == 5)
+            if(Hospital.MyHospital.WaitingQueue.Raw.Count > 0)
             {
-                SaveCurrentVisitList();
-            }
+                int newPatient = Hospital.MyHospital.DequeuePatient();
+                int waitSec = (int)Hospital.MyHospital.WaitingQueue.TimeSinceNow().TotalSeconds;
+                Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Dequeue(), waitSec, DoctorId, DateTime.Now, RoomId);
+                CurrentVisit = newV;
+                CurrentVisitList.Add(CurrentVisit);
 
-            Console.WriteLine(CurrentVisit.ToString());
-            return true;
+                if (CurrentVisitList.Count == 5)
+                {
+                    SaveCurrentVisitList();
+                }
+
+                Console.WriteLine(CurrentVisit.ToString());
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void GetCurrentVisitList()
