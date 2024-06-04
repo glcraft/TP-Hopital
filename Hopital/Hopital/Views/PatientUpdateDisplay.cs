@@ -25,18 +25,20 @@ namespace Hopital.Views
             Console.WriteLine($" {currentPatient.Firstname} {currentPatient.Lastname}, Actually :");
 
             Console.WriteLine($"Current address of the patient: {address}");
-            Console.Write($" Enter new Address : ");
+            Console.Write($" Enter new address (leave empty for no modification) : ");
             string newAddress = Console.ReadLine();
+            if (newAddress.Length > 0)
+                currentPatient.Address = newAddress;
 
             Console.WriteLine($"Current phone number of the patient: {phoneNumber}");
-            Console.Write($" Enter new phone Number : ");
+            Console.Write($" Enter new phone number (leave empty for no modification) : ");
             string newPhoneNumber = Console.ReadLine();
-            if (address != newAddress) currentPatient.Address = newAddress;
-            if (phoneNumber != newPhoneNumber) currentPatient.PhoneNumber = newPhoneNumber;
-
-            Console.WriteLine(currentPatient.ToString());
+            if (newPhoneNumber.Length > 0)
+                currentPatient.PhoneNumber = newPhoneNumber;
 
             new DaoPatientSqlServer().Update(currentPatient);
+            
+            Console.WriteLine($"Patient updated: {currentPatient}");
         }
     }
 }
