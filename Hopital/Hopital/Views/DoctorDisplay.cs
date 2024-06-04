@@ -25,7 +25,7 @@ namespace Hopital.Views
             {
                 Console.WriteLine(doctor);
 
-                Console.WriteLine($"ID de la consulting room : {consultingRoom.RoomId}\tDoctor id : {consultingRoom.DoctorId}");
+                Console.WriteLine($"Consulting room ID : {consultingRoom.RoomId}\tDoctor ID : {consultingRoom.DoctorId}");
 
                 Console.WriteLine("\n" + $"Hello Doctor {doctor.Name} you are logged as a doctor.");
 

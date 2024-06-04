@@ -64,25 +64,18 @@ namespace Hopital.Model
 
         public void GetCurrentVisitList()
         {
-            if (CurrentVisitList.Count > 0)
+            foreach (Visit v in CurrentVisitList)
             {
-               foreach (Visit v in CurrentVisitList)
-               {
-                   Console.WriteLine(v.ToString());
-               }
+                Console.WriteLine(v.ToString());
             }
         }
 
         public void SaveCurrentVisitList()
         {
             IDaoVisite x = new DaoVisitSqlServer();
-
-            if(CurrentVisitList.Count > 0)
+            foreach (Visit v in CurrentVisitList)
             {
-                foreach (Visit v in CurrentVisitList)
-                {
-                    x.Create(v);
-                }
+                x.Create(v);
             }
             currentVisitList.Clear();
         }

@@ -131,8 +131,7 @@ namespace Hopital.Model
             SqlDataReader reader = command.ExecuteReader();
             while(reader.Read())
             {
-                int newI = reader.GetInt32(0);
-                listI.Add(newI);
+                listI.Add(reader.GetInt32(0));
             }
             connection.Close();
             return listI;
