@@ -16,6 +16,8 @@ namespace Hopital
         private Hospital()
         {
             Console.WriteLine("creation de l'hopital");
+            ActiveStaff = new List<Staff>();
+            WaitingQueue = new Queue<int>();
         }
 
         public static  Hospital MyHospital
