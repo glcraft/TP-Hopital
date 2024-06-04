@@ -29,7 +29,7 @@ namespace Hopital.Model
         public string Login { get => login; set => login = value; }
         public string Password { get => password; set => password = value; }
         public string Name { get => name; set => name = value; }
-        public int Jod { get => job; set => job = value; }
+        public int Job { get => job; set => job = value; }
 
         public override string ToString()
         {

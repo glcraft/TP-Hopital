@@ -15,7 +15,7 @@ namespace Hopital.Model
 
         public override string ToString()
         {
-            return base.ToString()+"I am a Doctor";
+            return base.ToString()+", I am a Doctor";
         }
     }
 }
