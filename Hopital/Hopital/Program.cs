@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hopital.Model;
+using Hopital.Views;
 
 namespace Hopital
 {
@@ -54,6 +55,20 @@ namespace Hopital
         {
             Console.WriteLine(new DaoStaffSqlServer().Login("a", "a"));
         }
+
+        public static void TestNumberOfRoom()
+        {
+            Console.WriteLine(new DaoStaffSqlServer().NumberOfRoom());
+        }
+        public static void TestListOfRoomNumber()
+        {
+            List<int> liste = new DaoStaffSqlServer().ListOfRoomNumber();
+            foreach(int i in liste)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
     }
 
     class TestPatient
@@ -77,6 +92,10 @@ namespace Hopital
         static void Main(string[] args)
         {
             NewLogin();
+            //TestStaff.TestListOfRoomNumber();
+            //List<ConsultingRoom> listeC = Hospital.MyHospital.ConsultingRooms;
+            //Console.WriteLine(listeC.Count);
+            //listeC[0].ToString();
         }
         static void NewLogin()
         {
@@ -113,10 +132,10 @@ namespace Hopital
                     switch (user)
                     {
                         case Doctor doctor:
-                            DoctorInterface(doctor);
+                            new DoctorDisplay(doctor).Display();
                             break;
                         case Secretary secretary:
-                            SecretaryInterface(secretary);
+                            new SecretaryDisplay(secretary).Display();
                             break;
                         default:
                             Console.WriteLine("Unknown staff type.");
@@ -136,75 +155,8 @@ namespace Hopital
             } while (goOn);
         }
 
-        static void DoctorInterface(Doctor doctor)
-        {
-            bool logout = false;
-            while (!logout)
-            {
-                Console.WriteLine (doctor);
 
-                Console.WriteLine("\n"+$"Hello Doctor {doctor.Name} you are logged as a doctor.");
-                
-                Console.WriteLine($"-----------------------------------");
-                Console.WriteLine($"Your current patient is ..... : ");
-                Console.WriteLine();
-                Console.WriteLine($" 1 - Display the queue");
-                Console.WriteLine($" 2 - Next Patient");
-                Console.WriteLine($" 3 - Display lasts visits (not saved)");
-                Console.WriteLine($" 4 - Save lasts visits in DB");
-                Console.WriteLine($" 5 - See all recorded visits (from db)");
-                Console.WriteLine($" 10 - Logout");
-                Console.WriteLine($" 11 - Quit service");
-                Console.Write($"\n--> Your choise : ");
 
-                int resp = Convert.ToInt16(Console.ReadLine());
-                switch (resp)
-                {
-                    case 10:
-                        logout = true;
-                        break;
-                    case 11:
-                        Staff toremove = Hospital.MyHospital.ActiveStaff.Find( r => r.Login == doctor.Login );
-                        Hospital.MyHospital.ActiveStaff.Remove(toremove);
-                        logout = true;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid option. Please try again.");
-                        break;  
-                }
-            }
-        }
 
-        static void SecretaryInterface(Secretary secretary)
-        {
-            bool logout = false;
-
-            Hospital.MyHospital.WaitingQueue.Enqueue(1);
-
-            while (!logout)
-            {
-                Console.WriteLine($"Hello Miss {secretary.Name} you are logged as a secretary.");
-                Console.WriteLine($"-----------------------------------");
-                Console.WriteLine($" 1 - Inqueue a new patient");
-                Console.WriteLine($" 2 - Display the queue");
-                Console.WriteLine($" 3 - Display the next Patient");
-                Console.WriteLine($" 4 - Display all visits of a patient");
-                Console.WriteLine($" 5 - Update patient information");
-                Console.WriteLine($" 10 - Logout");
-                Console.WriteLine($" 11 - Quit service");
-                Console.Write($"\n--> Your choise : ");
-
-                int resp = Convert.ToInt16(Console.ReadLine());
-                switch (resp)
-                {
-                    case 10:
-                        logout = true;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid option. Please try again.");
-                        break;
-                }
-            }
-        }
     }
 }

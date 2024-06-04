@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Hopital.Model
 {
-    class ConsultingRoom
+    public class ConsultingRoom
     {
         private int roomId;
         private string doctorId;
         private Visit currentVisit;
         private List<Visit> currentVisitList;
 
-        public int Room_id
+        public int RoomId
         {
             get { return roomId; }
         }
 
-        public string Doctor_id
+        public string DoctorId
         {
             get { return doctorId; }
             set { doctorId = value; }
@@ -33,11 +33,51 @@ namespace Hopital.Model
         public List<Visit> CurrentVisitList
         {
             get { return currentVisitList; }
+            set { currentVisitList = value; }
         }
 
         public ConsultingRoom(int room_id)
         {
             this.roomId = room_id;
+            CurrentVisitList = new List<Visit>();
+        }
+
+        public override string ToString()
+        {
+            return "ConsultingRoom number : " +RoomId;
+        }
+
+        public bool CreateCurrentVisit()
+        {
+            Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Dequeue(), DoctorId, DateTime.Now, RoomId);
+            CurrentVisit = newV;
+            CurrentVisitList.Add(CurrentVisit);
+
+            if(CurrentVisitList.Count == 5)
+            {
+                SaveCurrentVisitList();
+            }
+
+            Console.WriteLine(CurrentVisit.ToString());
+            return true;
+        }
+
+        public void GetCurrentVisitList()
+        {
+            foreach (Visit v in CurrentVisitList)
+            {
+                Console.WriteLine(v.ToString());
+            }
+        }
+
+        public void SaveCurrentVisitList()
+        {
+            IDaoVisite x = new DaoVisitSqlServer();
+            foreach (Visit v in CurrentVisitList)
+            {
+                x.Create(v);
+            }
+            currentVisitList.Clear();
         }
     }
 }
