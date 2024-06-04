@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Hopital.Model
 {
-    interface IDaoPatient : Dao<Patient, int>
+    interface IDaoVisite : IDao<Visit, int>
     {
+        List<Visit> FindByPatientID(int id);
+        List<Visit> FindByDoctorID(string id);
     }
 }

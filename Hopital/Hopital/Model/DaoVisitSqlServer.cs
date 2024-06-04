@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace Hopital.Model
 {
-    class DaoVisitSqlServer : DaoVisite
+    class DaoVisitSqlServer : IDaoVisite
     {
         public void Create(Visit v)
         {
