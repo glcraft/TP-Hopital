@@ -10,7 +10,7 @@ namespace Hopital.Model
     {
         List<T> FindAll(); //aussi appelée SelectAll
         T FindById(PK id);
-        void Create(T obj); //Insert
+        PK Create(T obj); //Insert
         void Update(T obj);
         void Delete(PK id);
     }

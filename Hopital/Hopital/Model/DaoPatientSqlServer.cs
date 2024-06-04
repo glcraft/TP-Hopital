@@ -9,10 +9,10 @@ namespace Hopital.Model
 {
     class DaoPatientSqlServer : IDaoPatient
     {
-        public void Create(Patient patient)
+        public int Create(Patient patient)
         {
             SqlConnection connection = SqlServer.Get().Connection;
-            SqlCommand command = new SqlCommand("INSERT INTO Patients (firstname, lastname, address, age, phoneNumber) VALUES(@firstname, @lastname, @address, @age, @phoneNumber)", connection);
+            SqlCommand command = new SqlCommand("INSERT INTO Patients (firstname, lastname, address, age, phoneNumber) OUTPUT INSERTED.ID VALUES(@firstname, @lastname, @address, @age, @phoneNumber)", connection);
             command.Parameters.AddWithValue("firstname", patient.Firstname);
             command.Parameters.AddWithValue("lastname", patient.Lastname);
             command.Parameters.AddWithValue("address", patient.Address);
@@ -20,9 +20,11 @@ namespace Hopital.Model
             command.Parameters.AddWithValue("phoneNumber", patient.PhoneNumber);
             connection.Open();
             // execution de la requete
-            command.ExecuteNonQuery();
+            int id = (int)command.ExecuteScalar();
             // Console.WriteLine(sql);
             connection.Close();
+
+            return id;
         }
 
         public void Delete(int id)
