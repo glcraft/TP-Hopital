@@ -57,6 +57,9 @@ namespace Hopital.Views
                     case 4:
                         consultingRoom.SaveCurrentVisitList();
                         break;
+                    case 5:
+                        new PatientAllVisitsByDoctorId().Display(doctor.Login);
+                        break;
                     case 10:
                         logout = true;
                         break;

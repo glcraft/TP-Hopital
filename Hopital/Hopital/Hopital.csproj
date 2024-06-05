@@ -68,6 +68,7 @@
     <Compile Include="Views\IDisplay.cs" />
     <Compile Include="Views\DoctorDisplay.cs" />
     <Compile Include="Views\PatientAddNewDisplay.cs" />
+    <Compile Include="Views\PatientAllVisitsByDoctorId.cs" />
     <Compile Include="Views\PatientAllVisitsDisplay.cs" />
     <Compile Include="Views\PatientCheckInDisplay.cs" />
     <Compile Include="Views\PatientDeleteDisplay.cs" />
