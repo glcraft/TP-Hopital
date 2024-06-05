@@ -126,7 +126,7 @@ namespace Hopital
                         alreadyActive = true;
                         break;
                     }
-                    if (s.Job == user.Job && s.Login != username)
+                    if (s.Job == user.Job && s.Login != username && user.Job>0)
                     {
                         Console.WriteLine($"\n Sorry Docteur {user.Name} your room isn't available. Docteur {s.Name} is present.");
                         user = null;
