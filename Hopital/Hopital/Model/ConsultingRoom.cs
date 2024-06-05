@@ -51,8 +51,8 @@ namespace Hopital.Model
         {
             if(Hospital.MyHospital.WaitingQueue.Raw.Count > 0)
             {
-                int newPatient = Hospital.MyHospital.DequeuePatient();
                 int waitSec = (int)Hospital.MyHospital.WaitingQueue.TimeSinceNow().TotalSeconds;
+                int newPatient = Hospital.MyHospital.DequeuePatient();
                 Visit newV = new Visit(newPatient, waitSec, DoctorId, DateTime.Now, RoomId);
                 CurrentVisit = newV;
                 CurrentVisitList.Add(CurrentVisit);
