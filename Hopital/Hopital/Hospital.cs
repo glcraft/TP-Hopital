@@ -90,6 +90,12 @@ namespace Hopital
             }
             WaitingQueue.Enqueue(patient_id);
         }
+
+        public int DequeuePatient()
+        {
+            return WaitingQueue.Dequeue();
+        }
+
         // Queue de id de patient
         public QueueTimed<int> WaitingQueue { get; }
         public List<Staff> ActiveStaff { get; }
