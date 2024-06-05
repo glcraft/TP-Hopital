@@ -16,6 +16,7 @@ namespace Hopital.Views
         {
             doctor = doc;
             consultingRoom = Hospital.MyHospital.ConsultingRooms.Find(cr => cr.RoomId == doctor.Job);
+            consultingRoom.DoctorId = doctor.Login;
         }
 
         public void Display()

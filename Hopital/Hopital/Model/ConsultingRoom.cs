@@ -49,7 +49,8 @@ namespace Hopital.Model
 
         public bool CreateCurrentVisit()
         {
-            Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Dequeue(), DoctorId, DateTime.Now, RoomId);
+            int waitSec = (int)Hospital.MyHospital.WaitingQueue.TimeSinceNow().TotalSeconds;
+            Visit newV = new Visit(Hospital.MyHospital.WaitingQueue.Dequeue(), waitSec, DoctorId, DateTime.Now, RoomId);
             CurrentVisit = newV;
             CurrentVisitList.Add(CurrentVisit);
 

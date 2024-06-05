@@ -7,9 +7,11 @@ namespace Hopital.Views
     {
         public void Display()
         {
-            Console.WriteLine(" --- Next Patient : \n");
             int next = Hospital.MyHospital.WaitingQueue.Peek();
-            Console.WriteLine(new DaoPatientSqlServer().FindById(next));
+            TimeSpan waitTime = Hospital.MyHospital.WaitingQueue.TimeSinceNow();
+            Patient p = new DaoPatientSqlServer().FindById(next);
+            Console.WriteLine(" --- Next Patient :");
+            Console.WriteLine($"{p} (waiting for {waitTime})");
             Console.WriteLine();
         }
     }

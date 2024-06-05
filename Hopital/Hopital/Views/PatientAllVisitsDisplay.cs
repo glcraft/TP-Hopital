@@ -23,7 +23,10 @@ namespace Hopital.Views
             Console.WriteLine($" Visits for patient {patientId}:");
             foreach (Visit v in myVisits)
             {
-                Console.WriteLine($" - {v.Date} - Doctor {v.DoctorId}");
+                string waitTime = null;
+                if (v.WaitTime != null)
+                    waitTime = $" (waiting for {(int)v.WaitTime}) seconds";
+                Console.WriteLine($" - {v.Date} - Doctor {v.DoctorId}{waitTime}");
             }
         }
     }

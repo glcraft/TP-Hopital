@@ -12,17 +12,17 @@ namespace Hopital.Model
     {
         public int Create(Visit v)
         {
-            string sql = "INSERT INTO Visits OUTPUT INSERTED.ID values (@patient_id, @doctor_id, @date, @room_id, @fee)";
+            string sql = "INSERT INTO Visits (patient_id, doctor_id, date, room_id, fee, wait_time) OUTPUT INSERTED.id VALUES(@patient_id, @doctor_id, @date, @room_id, @fee, @wait_time)";
 
             SqlConnection connection = SqlServer.Get().Connection;
-            SqlCommand command = connection.CreateCommand();
+            SqlCommand command = new SqlCommand(sql, connection);
 
-            command.CommandText = sql;
-            command.Parameters.Add("patient_id", SqlDbType.Int).Value = v.PatientId;
-            command.Parameters.Add("doctor_id", SqlDbType.NVarChar).Value = v.DoctorId;
-            command.Parameters.Add("date", SqlDbType.DateTime).Value = v.Date;
-            command.Parameters.Add("room_id", SqlDbType.Int).Value = v.RoomId;
-            command.Parameters.Add("fee", SqlDbType.Int).Value = v.Fee ;
+            command.Parameters.AddWithValue("patient_id", v.PatientId);
+            command.Parameters.AddWithValue("doctor_id", v.DoctorId);
+            command.Parameters.AddWithValue("date", v.Date);
+            command.Parameters.AddWithValue("room_id", v.RoomId);
+            command.Parameters.AddWithValue("fee", v.Fee) ;
+            command.Parameters.AddWithValue("wait_time", v.WaitTime);
 
             connection.Open();
             int id = (int)command.ExecuteScalar();
@@ -62,7 +62,7 @@ namespace Hopital.Model
             SqlConnection connection = SqlServer.Get().Connection;
             SqlCommand command = connection.CreateCommand();
 
-            command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE doctor_id = @id_doct";
+            command.CommandText = "SELECT * FROM Visits WHERE doctor_id = @id_doct";
             command.Parameters.AddWithValue("id_doct", id_doct);
 
             connection.Open();
@@ -70,7 +70,18 @@ namespace Hopital.Model
             //Console.WriteLine("Search visits with doctor ID : " + id_doct);
             while (reader.Read())
             {
-                Visit newV = new Visit(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDateTime(3), reader.GetInt32(4), reader.GetInt32(5));
+                int? waitTime = null;
+                if (!reader.IsDBNull(reader.GetOrdinal("wait_time")))
+                    waitTime = (int)reader["wait_time"];
+                Visit newV = new Visit(
+                    (int)reader["id"],
+                    (int)reader["patient_id"],
+                    waitTime,
+                    (string)reader["doctor_id"],
+                    (DateTime)reader["id"],
+                    (int)reader["room_id"],
+                    (int)reader["fee"]
+                );
                 listeV.Add(newV);
             }
             connection.Close();
@@ -90,15 +101,27 @@ namespace Hopital.Model
             SqlConnection connection = SqlServer.Get().Connection;
             SqlCommand command = connection.CreateCommand();
 
-            command.CommandText = "SELECT id, patient_id, doctor_id, date, room_id, fee FROM Visits WHERE patient_id = @id_pat";
+            command.CommandText = "SELECT * FROM Visits WHERE patient_id = @id_pat";
             command.Parameters.AddWithValue("id_pat", id_pat);
 
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             //Console.WriteLine("Search visits with patient ID : " + id_pat);
+            
             while (reader.Read()) 
             {
-                Visit newV = new Visit(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDateTime(3), reader.GetInt32(4), reader.GetInt32(5));
+                int? waitTime = null;
+                if (!reader.IsDBNull(reader.GetOrdinal("wait_time")))
+                    waitTime = (int)reader["wait_time"];
+                Visit newV = new Visit(
+                    (int)reader["id"],
+                    (int)reader["patient_id"],
+                    waitTime,
+                    (string)reader["doctor_id"],
+                    (DateTime)reader["date"],
+                    (int)reader["room_id"],
+                    (int)reader["fee"]
+                );
                 listeV.Add(newV);
             }
             connection.Close();

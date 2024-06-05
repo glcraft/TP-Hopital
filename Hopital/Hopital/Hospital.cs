@@ -9,6 +9,43 @@ using Hopital.Model;
 
 namespace Hopital
 {
+    public class QueueTimed<T>
+    {
+        private Queue<Item> queue;
+        public class Item
+        {
+            public T value;
+            public DateTime time;
+        }
+        public QueueTimed()
+        {
+            queue = new Queue<Item>();
+        }
+        public Queue<Item> Raw { get => queue; }
+        public void Enqueue(T value)
+        {
+            queue.Enqueue(new Item{ value = value, time = DateTime.Now });
+        }
+
+        public T Peek()
+        {
+            return queue.Peek().value;
+        }
+        public DateTime PeekTime()
+        {
+            return queue.Peek().time;
+        }
+        public T Dequeue()
+        {
+            return queue.Dequeue().value;
+        } 
+        public TimeSpan TimeSinceNow()
+        {
+            return DateTime.Now - PeekTime();
+        }
+
+    }
+    
     // Singleton Hospital.myHospital 
     public class Hospital
     {
@@ -18,7 +55,7 @@ namespace Hopital
         {
             Console.WriteLine("creation de l'hopital");
             ActiveStaff = new List<Staff>();
-            WaitingQueue = new Queue<int>();
+            WaitingQueue = new QueueTimed<int>();
             ConsultingRooms = new List<ConsultingRoom>();
 
             List<int> listeI = new DaoStaffSqlServer().ListOfRoomNumber();
@@ -54,7 +91,7 @@ namespace Hopital
             WaitingQueue.Enqueue(patient_id);
         }
         // Queue de id de patient
-        public Queue<int> WaitingQueue { get; }
+        public QueueTimed<int> WaitingQueue { get; }
         public List<Staff> ActiveStaff { get; }
 
         public List<ConsultingRoom> ConsultingRooms { get; }
