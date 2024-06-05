@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +12,17 @@ namespace Hopital.Model
     {
         public int Create(Visit v)
         {
-            string sql = "INSERT INTO Visits OUTPUT INSERTED.ID values (@patient_id, @doctor_id, @date, @room_id, @fee)";
+            string sql = "INSERT INTO Visits (patient_id, doctor_id, date, room_id, fee, wait_time) OUTPUT INSERTED.id VALUES(@patient_id, @doctor_id, @date, @room_id, @fee, @wait_time)";
 
             SqlConnection connection = SqlServer.Get().Connection;
-            SqlCommand command = connection.CreateCommand();
+            SqlCommand command = new SqlCommand(sql, connection);
 
-            command.CommandText = sql;
-            command.Parameters.Add("patient_id", SqlDbType.Int).Value = v.PatientId;
-            command.Parameters.Add("doctor_id", SqlDbType.NVarChar).Value = v.DoctorId;
-            command.Parameters.Add("date", SqlDbType.DateTime).Value = v.Date;
-            command.Parameters.Add("room_id", SqlDbType.Int).Value = v.RoomId;
-            command.Parameters.Add("fee", SqlDbType.Int).Value = v.Fee ;
+            command.Parameters.AddWithValue("patient_id", v.PatientId);
+            command.Parameters.AddWithValue("doctor_id", v.DoctorId);
+            command.Parameters.AddWithValue("date", v.Date);
+            command.Parameters.AddWithValue("room_id", v.RoomId);
+            command.Parameters.AddWithValue("fee", v.Fee) ;
+            command.Parameters.AddWithValue("wait_time", v.WaitTime);
 
             connection.Open();
             int id = (int)command.ExecuteScalar();
