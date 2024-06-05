@@ -57,9 +57,13 @@ namespace Hopital.Views
                         logout = true;
                         break;
                     case 11:
+                        Console.WriteLine("in case 11");
                         Staff toremove = Hospital.MyHospital.ActiveStaff.Find(r => r.Login == admin.Login);
                         Hospital.MyHospital.ActiveStaff.Remove(toremove);
                         logout = true;
+                        break;
+                    case 12:
+                        Console.WriteLine("ici cas 12");
                         break;
                     default:
                         Console.WriteLine("Invalid option. Please try again.");

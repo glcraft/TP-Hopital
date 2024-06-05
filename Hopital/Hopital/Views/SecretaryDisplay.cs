@@ -54,6 +54,11 @@ namespace Hopital.Views
                     case 10:
                         logout = true;
                         break;
+                    case 11:
+                        Staff toremove = Hospital.MyHospital.ActiveStaff.Find(r => r.Login == secretary.Login);
+                        Hospital.MyHospital.ActiveStaff.Remove(toremove);
+                        logout = true;
+                        break;
                     default:
                         Console.WriteLine("Invalid option. Please try again.");
                         break;
