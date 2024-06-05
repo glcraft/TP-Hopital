@@ -47,7 +47,7 @@ namespace Hopital.Views
                 Hospital.MyHospital.AddPatientToQueue(id);
 
             }
-            Console.WriteLine("Patient Adfded in Active Queue");
+            Console.WriteLine("Patient added in the active queue");
         }
     }
 }
