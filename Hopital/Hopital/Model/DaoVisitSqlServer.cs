@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,10 +70,13 @@ namespace Hopital.Model
             //Console.WriteLine("Search visits with doctor ID : " + id_doct);
             while (reader.Read())
             {
+                int? waitTime = null;
+                if (!reader.IsDBNull(reader.GetOrdinal("wait_time")))
+                    waitTime = (int)reader["wait_time"];
                 Visit newV = new Visit(
                     (int)reader["id"],
                     (int)reader["patient_id"],
-                    (int)reader["wait_time"],
+                    waitTime,
                     (string)reader["doctor_id"],
                     (DateTime)reader["id"],
                     (int)reader["room_id"],
@@ -104,14 +107,18 @@ namespace Hopital.Model
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             //Console.WriteLine("Search visits with patient ID : " + id_pat);
+            
             while (reader.Read()) 
             {
+                int? waitTime = null;
+                if (!reader.IsDBNull(reader.GetOrdinal("wait_time")))
+                    waitTime = (int)reader["wait_time"];
                 Visit newV = new Visit(
                     (int)reader["id"],
                     (int)reader["patient_id"],
-                    (int)reader["wait_time"],
+                    waitTime,
                     (string)reader["doctor_id"],
-                    (DateTime)reader["id"],
+                    (DateTime)reader["date"],
                     (int)reader["room_id"],
                     (int)reader["fee"]
                 );
