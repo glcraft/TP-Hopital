@@ -8,7 +8,7 @@ namespace Hopital.Views
         public void Display()
         {
             Console.WriteLine(" --- Next Patient : \n");
-            if (Hospital.MyHospital.WaitingQueue.Count > 0)
+            if (Hospital.MyHospital.WaitingQueue.Raw.Count > 0)
             {
                 int next = Hospital.MyHospital.WaitingQueue.Peek();
                 TimeSpan waitTime = Hospital.MyHospital.WaitingQueue.TimeSinceNow();
