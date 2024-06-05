@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CyrilleTests.cs" />
+    <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\ConsultingRoom.cs" />
     <Compile Include="Hospital.cs" />
     <Compile Include="Model\DaoStaffSqlServer.cs" />
@@ -63,11 +64,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Exceptions.cs" />
     <Compile Include="Utils\FakeEnvironment.cs" />
+    <Compile Include="Views\AdminDisplay.cs" />
     <Compile Include="Views\IDisplay.cs" />
     <Compile Include="Views\DoctorDisplay.cs" />
+    <Compile Include="Views\PatientAddNewDisplay.cs" />
+    <Compile Include="Views\PatientAllVisitsByDoctorId.cs" />
     <Compile Include="Views\PatientAllVisitsDisplay.cs" />
     <Compile Include="Views\PatientCheckInDisplay.cs" />
+    <Compile Include="Views\PatientDeleteDisplay.cs" />
     <Compile Include="Views\PatientNextDisplay.cs" />
+    <Compile Include="Views\PatientSeeAll.cs" />
+    <Compile Include="Views\PatientSpecificDisplay.cs" />
+    <Compile Include="Views\PatientUpdateAllDisplay.cs" />
     <Compile Include="Views\PatientUpdateDisplay.cs" />
     <Compile Include="Views\QueueDisplay.cs" />
     <Compile Include="Views\SecretaryDisplay.cs" />

@@ -24,14 +24,13 @@ namespace Hopital.Views
             bool logout = false;
             while (!logout)
             {
-                Console.WriteLine(doctor);
-
+                
                 Console.WriteLine($"Consulting room ID : {consultingRoom.RoomId}\tDoctor ID : {consultingRoom.DoctorId}");
 
-                Console.WriteLine("\n" + $"Hello Doctor {doctor.Name} you are logged as a doctor.");
+                Console.WriteLine("\n" + $"Doctor {doctor.Name} you are logged as a doctor.");
 
                 Console.WriteLine($"-----------------------------------");
-                Console.WriteLine($"Your current patient is ..... : ");
+               // Console.WriteLine($"Your current patient have the id  : {consultingRoom.CurrentVisit.PatientId}");
                 Console.WriteLine();
                 Console.WriteLine($" 1 - Display the queue");
                 Console.WriteLine($" 2 - Next Patient");
@@ -43,6 +42,7 @@ namespace Hopital.Views
                 Console.Write($"\n--> Your choise : ");
 
                 int resp = Convert.ToInt16(Console.ReadLine());
+                Console.Clear();
                 switch (resp)
                 {
                     case 1:
@@ -56,6 +56,9 @@ namespace Hopital.Views
                         break;
                     case 4:
                         consultingRoom.SaveCurrentVisitList();
+                        break;
+                    case 5:
+                        new PatientAllVisitsByDoctorId().Display(doctor.Login);
                         break;
                     case 10:
                         logout = true;

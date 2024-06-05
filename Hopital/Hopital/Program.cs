@@ -8,7 +8,7 @@ using Hopital.Views;
 
 namespace Hopital
 {
-    class TestVisits 
+    class TestVisits
     {
         public static void TestCreateVisit()
         {
@@ -42,7 +42,7 @@ namespace Hopital
             }
         }
     }
-    class TestStaff 
+    class TestStaff
     {
         public static void TestSelectAll()
         {
@@ -63,7 +63,7 @@ namespace Hopital
         public static void TestListOfRoomNumber()
         {
             List<int> liste = new DaoStaffSqlServer().ListOfRoomNumber();
-            foreach(int i in liste)
+            foreach (int i in liste)
             {
                 Console.WriteLine(i);
             }
@@ -99,9 +99,8 @@ namespace Hopital
         }
         static void NewLogin()
         {
-          
-            bool goOn = true;
 
+            bool goOn = true;
             do
             {
                 Console.WriteLine("Welcome to the Console App");
@@ -118,17 +117,34 @@ namespace Hopital
                 Staff user = null;
                 user = new DaoStaffSqlServer().Login(username, password);
 
+                // check if username exists in ActiveStaff and in room is free for use
+                bool alreadyActive = false;
+                foreach (Staff s in Hospital.MyHospital.ActiveStaff)
+                {
+                    if (s.Login == username)
+                    {
+                        alreadyActive = true;
+                        break;
+                    }
+                    else if (s.Job == user.Job && s.Login != username && user.Job>0)
+                    {
+                        Console.WriteLine($"\n Sorry Docteur {user.Name} your room isn't available. Docteur {s.Name} is present.");
+                        user = null;
+                        break;
+                    }
+                }
+
                 if (user != null)
                 {
-                    Hospital.MyHospital.ActiveStaff.Add(user);
+                    if (!alreadyActive)
+                        Hospital.MyHospital.ActiveStaff.Add(user);
 
-                    Console.WriteLine("Active Staff  : ");
+                    Console.WriteLine("\nToday active Staff  : ");
                     foreach (Staff s in Hospital.MyHospital.ActiveStaff)
                     {
-                        Console.WriteLine(s.Name);
+                        Console.WriteLine($"\t - {s.Name}  ");
                     }
-
-
+                    Console.WriteLine("Have a nice day. \n");
                     switch (user)
                     {
                         case Doctor doctor:
@@ -137,6 +153,9 @@ namespace Hopital
                         case Secretary secretary:
                             new SecretaryDisplay(secretary).Display();
                             break;
+                        case Admin admin:
+                            new AdminDisplay(admin).Display();
+                            break;
                         default:
                             Console.WriteLine("Unknown staff type.");
                             break;
@@ -144,19 +163,19 @@ namespace Hopital
                 }
                 else
                 {
-                    Console.WriteLine("\nInvalid username or password.");
-                    Console.WriteLine("------- Access denied ------\n");
+                    Console.WriteLine("\n------- Access denied ------\n");
                 }
-
                 Console.WriteLine("Do you want shut down the application  y/n ?");
                 string resp = Console.ReadLine();
-                if (resp == "y") goOn = false;
+                if (resp == "y")
+                {
+                    Console.WriteLine("Are you sure ?  y/n ?");
+                    string confirm = Console.ReadLine();
+                    if (confirm == "y")
+                        goOn = false;
+                }
                 Console.Clear();
             } while (goOn);
         }
-
-
-
-
     }
 }

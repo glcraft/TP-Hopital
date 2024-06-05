@@ -1,33 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Hopital.Model;
 
 namespace Hopital.Views
 {
-    class SecretaryDisplay
+    class AdminDisplay : IDisplay
     {
-        Secretary secretary;
 
-        public SecretaryDisplay(Secretary sec)
+        Admin admin;
+
+        public AdminDisplay(Admin admin)
         {
-            this.secretary = sec;
+            this.admin = admin;
         }
 
         public void Display()
         {
             bool logout = false;
+
             while (!logout)
             {
-                Console.WriteLine($"Miss {secretary.Name} you are logged as a secretary.");
+              
+                Console.WriteLine("\n" + $"{admin.Name} you are logged as an administrateur.");
+
                 Console.WriteLine($"-----------------------------------");
-                Console.WriteLine($" 1 - Inqueue a new patient");
-                Console.WriteLine($" 2 - Display the queue");
-                Console.WriteLine($" 3 - Display the next Patient");
-                Console.WriteLine($" 4 - Display all visits of a patient");
-                Console.WriteLine($" 5 - Update patient information");
+                Console.WriteLine();
+                Console.WriteLine($" 1 - Add a new patient");
+                Console.WriteLine($" 2 - Delete a patient");
+                Console.WriteLine($" 3 - Update a patient");
+                Console.WriteLine($" 4 - See all patients");
+                Console.WriteLine($" 5 - See a spécific patient");
                 Console.WriteLine($" 10 - Logout");
                 Console.WriteLine($" 11 - Quit service");
                 Console.Write($"\n--> Your choise : ");
@@ -37,27 +39,31 @@ namespace Hopital.Views
                 switch (resp)
                 {
                     case 1:
-                        new PatientCheckInDisplay().Display();
+                        new PatientAddNewDisplay().Display();
                         break;
                     case 2:
-                        new QueueDisplay().Display();
+                        new PatientDeleteDisplay().Display();
                         break;
                     case 3:
-                        new PatientNextDisplay().Display();
+                        new PatientUpdateAllDisplay().Display();
                         break;
                     case 4:
-                        new PatientAllVisitsDisplay().Display();
+                        new PatientSeeAllDisplay().Display();
                         break;
                     case 5:
-                        new PatientUpdateDisplay().Display();
+                        new PatientSpecificDisplay().Display();
                         break;
                     case 10:
                         logout = true;
                         break;
                     case 11:
-                        Staff toremove = Hospital.MyHospital.ActiveStaff.Find(r => r.Login == secretary.Login);
+                        Console.WriteLine("in case 11");
+                        Staff toremove = Hospital.MyHospital.ActiveStaff.Find(r => r.Login == admin.Login);
                         Hospital.MyHospital.ActiveStaff.Remove(toremove);
                         logout = true;
+                        break;
+                    case 12:
+                        Console.WriteLine("ici cas 12");
                         break;
                     default:
                         Console.WriteLine("Invalid option. Please try again.");
@@ -65,6 +71,5 @@ namespace Hopital.Views
                 }
             }
         }
-
     }
 }
