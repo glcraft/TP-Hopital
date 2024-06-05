@@ -78,7 +78,7 @@ namespace Hopital.Model
                     (int)reader["patient_id"],
                     waitTime,
                     (string)reader["doctor_id"],
-                    (DateTime)reader["id"],
+                    (DateTime)reader["date"],
                     (int)reader["room_id"],
                     (int)reader["fee"]
                 );
